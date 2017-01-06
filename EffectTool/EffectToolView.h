@@ -4,7 +4,7 @@
 
 #pragma once
 
-
+class CEffectToolDoc;
 class CEffectToolView : public CView
 {
 protected: // serialization에서만 만들어집니다.
@@ -39,6 +39,9 @@ protected:
 
 // 생성된 메시지 맵 함수
 protected:
+	afx_msg void OnFilePrintPreview();
+	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
 };
 

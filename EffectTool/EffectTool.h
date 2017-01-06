@@ -14,7 +14,7 @@
 // 이 클래스의 구현에 대해서는 EffectTool.cpp을 참조하십시오.
 //
 
-class CEffectToolApp : public CWinApp
+class CEffectToolApp : public CWinAppEx
 {
 public:
 	CEffectToolApp();
@@ -26,6 +26,13 @@ public:
 	virtual int ExitInstance();
 
 // 구현입니다.
+	UINT  m_nAppLook;
+	BOOL  m_bHiColorIcons;
+
+	virtual void PreLoadState();
+	virtual void LoadCustomState();
+	virtual void SaveCustomState();
+
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 };

@@ -1,26 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="00.MainFrame">
-      <UniqueIdentifier>{c0dd7c24-9d05-4cf9-868a-757fdb5c1664}</UniqueIdentifier>
+    <Filter Include="00.MainFrm">
+      <UniqueIdentifier>{ae167cb2-738c-424a-af42-370122798d0b}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.View">
-      <UniqueIdentifier>{b2faa5c9-7488-4a03-be79-6c74a4794ae7}</UniqueIdentifier>
+      <UniqueIdentifier>{e44f4a88-fd14-4777-a075-286ace13de83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99,Default">
-      <UniqueIdentifier>{6a02af35-2fc4-471f-a797-ad058d564e80}</UniqueIdentifier>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{49816f1a-887a-4cc8-b128-32947f0c0754}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99,Default\리소스 파일">
+    <Filter Include="99.Default\리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="99,Default\헤더 파일">
+    <Filter Include="99.Default\소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="99.Default\헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="99,Default\소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="01.View\0.MainView">
+      <UniqueIdentifier>{cbf63e70-f0da-496e-aa40-517c6b29f85a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.View\1.FormView">
+      <UniqueIdentifier>{4861352d-da5d-46b5-ac87-2efdf4c29252}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,63 +34,75 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
-      <Filter>99,Default\헤더 파일</Filter>
+      <Filter>99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>99,Default\헤더 파일</Filter>
+      <Filter>99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>99,Default\헤더 파일</Filter>
+      <Filter>99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="EffectToolDoc.h">
-      <Filter>99,Default\헤더 파일</Filter>
+      <Filter>99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>99,Default\헤더 파일</Filter>
+      <Filter>99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="MainFrm.h">
-      <Filter>00.MainFrame</Filter>
+      <Filter>00.MainFrm</Filter>
     </ClInclude>
     <ClInclude Include="EffectToolView.h">
-      <Filter>01.View</Filter>
+      <Filter>01.View\0.MainView</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFormView.h">
+      <Filter>01.View\1.FormView</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
-      <Filter>99,Default\소스 파일</Filter>
+      <Filter>99.Default\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>99,Default\소스 파일</Filter>
+      <Filter>99.Default\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="EffectToolDoc.cpp">
-      <Filter>99,Default\소스 파일</Filter>
+      <Filter>99.Default\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MainFrm.cpp">
-      <Filter>00.MainFrame</Filter>
+      <Filter>00.MainFrm</Filter>
     </ClCompile>
     <ClCompile Include="EffectToolView.cpp">
-      <Filter>01.View</Filter>
+      <Filter>01.View\0.MainView</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFormView.cpp">
+      <Filter>01.View\1.FormView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">
-      <Filter>99,Default\리소스 파일</Filter>
+      <Filter>99.Default\리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\EffectTool.rc2">
-      <Filter>99,Default\리소스 파일</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
+    <Image Include="UserImages.bmp">
+      <Filter>99.Default\리소스 파일</Filter>
+    </Image>
     <Image Include="res\EffectToolDoc.ico">
-      <Filter>99,Default\리소스 파일</Filter>
+      <Filter>99.Default\리소스 파일</Filter>
     </Image>
     <Image Include="res\EffectTool.ico">
-      <Filter>99,Default\리소스 파일</Filter>
+      <Filter>99.Default\리소스 파일</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">
-      <Filter>99,Default\리소스 파일</Filter>
+      <Filter>99.Default\리소스 파일</Filter>
     </Image>
+    <Image Include="res\Toolbar256.bmp">
+      <Filter>99.Default\리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\EffectTool.rc2">
+      <Filter>99.Default\리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

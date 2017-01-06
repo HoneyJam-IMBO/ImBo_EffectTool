@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F08B6D7E-A8AF-478D-BA06-5C55E68C27AE}</ProjectGuid>
+    <ProjectGuid>{A4BD271B-DB50-480C-8615-59082FD70C00}</ProjectGuid>
     <RootNamespace>EffectTool</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <Keyword>MFCProj</Keyword>
@@ -185,6 +185,7 @@
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MyFormView.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MyFormView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -205,14 +207,21 @@
     <ResourceCompile Include="EffectTool.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\EffectTool.rc2" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="res\EffectTool.ico" />
     <Image Include="res\EffectToolDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\Toolbar256.bmp" />
+    <Image Include="UserImages.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\EffectTool.rc2" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="EffectTool.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
