@@ -4,6 +4,7 @@
 
 #pragma once
 
+class CRenderThread;
 class CEffectToolView;
 class CMyFormView;
 
@@ -23,8 +24,8 @@ public:
 public:
 	CEffectToolView*	m_pMainView;
 	CMyFormView*		m_pMyFormView;
-
 	CSplitterWnd		m_MainSplitter;
+
 
 // 재정의입니다.
 public:

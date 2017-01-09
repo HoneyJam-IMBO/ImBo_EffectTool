@@ -4,6 +4,7 @@
 
 #pragma once
 
+class CRenderThread;
 class CEffectToolDoc;
 class CEffectToolView : public CView
 {
@@ -17,7 +18,11 @@ public:
 
 // 작업입니다.
 public:
+	float		m_fTimeDelta{ 0.f };
+	HANDLE		m_LoopEvent;
+	HANDLE		m_RenderEvent;
 
+	CRenderThread*	m_pThread;
 // 재정의입니다.
 public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.
@@ -43,6 +48,8 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
+public:
+	virtual void OnInitialUpdate();
 };
 
 #ifndef _DEBUG  // EffectToolView.cpp의 디버그 버전

@@ -11,6 +11,8 @@
 
 #include "EffectToolDoc.h"
 #include "EffectToolView.h"
+#include "MainFrm.h"
+#include "RenderThread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -40,6 +42,9 @@ CEffectToolView::CEffectToolView()
 
 CEffectToolView::~CEffectToolView()
 {
+	CloseHandle(m_LoopEvent);
+	CloseHandle(m_RenderEvent);
+	delete m_pThread;
 }
 
 BOOL CEffectToolView::PreCreateWindow(CREATESTRUCT& cs)
@@ -48,6 +53,24 @@ BOOL CEffectToolView::PreCreateWindow(CREATESTRUCT& cs)
 	//  Window 클래스 또는 스타일을 수정합니다.
 
 	return CView::PreCreateWindow(cs);
+}
+
+void CEffectToolView::OnInitialUpdate()
+{
+	CView::OnInitialUpdate();
+	// RenderThread /////////////////////////////////////
+	m_LoopEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+	if (m_LoopEvent == NULL)		return;
+	m_RenderEvent = CreateEvent(NULL, FALSE, TRUE, NULL);
+	if (m_RenderEvent == NULL)	return;
+
+	m_pThread = new CRenderThread;
+	m_pThread->m_LoopEvent = &m_LoopEvent;
+	m_pThread->m_RenderEvent = &m_RenderEvent;
+	m_pThread->Initialize();
+	/////////////////////////////////////////////////////
+
+
 }
 
 // CEffectToolView 그리기
@@ -60,6 +83,11 @@ void CEffectToolView::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
+	WaitForSingleObject(m_RenderEvent, INFINITE);
+
+	int k = 0;
+
+	SetEvent(m_LoopEvent);
 }
 
 
@@ -125,3 +153,5 @@ CEffectToolDoc* CEffectToolView::GetDocument() const // 디버그되지 않은 버전은 �
 
 
 // CEffectToolView 메시지 처리기
+
+

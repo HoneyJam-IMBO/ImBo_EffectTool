@@ -10,6 +10,7 @@
 
 #include "EffectToolView.h"
 #include "MyFormView.h"
+#include "RenderThread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -49,6 +50,7 @@ CMainFrame::CMainFrame()
 
 CMainFrame::~CMainFrame()
 {
+
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -56,7 +58,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWndEx::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	
+
+
 	return 0;
 }
 
@@ -75,6 +78,7 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/,
 
 	m_pMyFormView = (CMyFormView*)m_MainSplitter.GetPane(0, 0);
 	m_pMainView = (CEffectToolView*)m_MainSplitter.GetPane(0, 1);
+
 
 	return TRUE;
 }
