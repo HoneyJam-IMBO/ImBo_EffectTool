@@ -18,7 +18,7 @@
 #define new DEBUG_NEW
 #endif
 
-
+HWND g_hWnd;
 // CEffectToolView
 
 IMPLEMENT_DYNCREATE(CEffectToolView, CView)
@@ -69,7 +69,7 @@ void CEffectToolView::OnInitialUpdate()
 	m_pThread->m_RenderEvent = &m_RenderEvent;
 	m_pThread->Initialize();
 	/////////////////////////////////////////////////////
-
+	g_hWnd = m_hWnd;
 
 }
 

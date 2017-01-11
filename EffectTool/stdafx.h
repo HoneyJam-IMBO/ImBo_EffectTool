@@ -36,11 +36,6 @@
 
 
 
-
-
-
-
-
 #ifdef _UNICODE
 #if defined _M_IX86
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -51,4 +46,58 @@
 #endif
 #endif
 
+
+
+
+#include <windows.h>
+
+// C 런타임 헤더 파일입니다.
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
+#include <timeapi.h>
+#include <ctime>
+#include <time.h>
+#include <timeapi.h>
+#include <queue>
+#include <unordered_map>
+
+// D3D11
+//#include <d3dx11tex.h>
+#include <D3DX11tex.h>
+
+//
+//// DirectX Math
+//#include <DirectXMath.h>
+//#include <DirectXPackedVector.h>
+//#include <DirectXColors.h>
+//#include <DirectXCollision.h>
+//#include <d3dx11.h>
+//#include <d3d11.h>
+//#include <D3DX11tex.h>
+
+//#include <d3dcompiler.h>  	//쉐이더 컴파일 함수를 사용하기 위한 헤더 파일
+//#include <D3DX10Math.h>	//Direct3D 수학 함수를 사용하기 위한 헤더 파일
+//#include <D3D9Types.h>
+//#include <Mmsystem.h>
+//#include <math.h>
+
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
+#include <DirectXColors.h>
+#include <DirectXCollision.h>
+
+// C++11
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <list>
+#include <map>
+#include <string>
+#include <chrono>
+#include <stack>
+#include <memory>
+
+using namespace std;
 

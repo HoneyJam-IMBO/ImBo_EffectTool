@@ -34,6 +34,27 @@
     <Filter Include="02.Manager">
       <UniqueIdentifier>{60c1ce9f-6bbe-465a-9b04-bc921a2c3807}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Manager\0.Device">
+      <UniqueIdentifier>{b170a25c-c04c-4738-b27f-6424f728c718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\1.Time">
+      <UniqueIdentifier>{0352a97a-af0c-4cb0-a0f7-b471e3279575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject">
+      <UniqueIdentifier>{c87f9ba2-d625-4269-8454-7998dcc28a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject\0.Texture">
+      <UniqueIdentifier>{f5694a75-d583-4531-86a1-1250660d4d03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject\1.Sampler">
+      <UniqueIdentifier>{94ce23ff-2aae-49f4-9615-353acb8b8b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject\2.Buffer">
+      <UniqueIdentifier>{b6ea6447-81a8-46c8-beda-eff56e106548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject\2.Buffer\0.ConstantBuffer">
+      <UniqueIdentifier>{eb70aa65-0e0d-4e09-9833-facb81eab8ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -69,11 +90,26 @@
     <ClInclude Include="Define.h">
       <Filter>99.Default\헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TimeMgr.h">
-      <Filter>02.Manager</Filter>
-    </ClInclude>
     <ClInclude Include="IncludeHeader.h">
       <Filter>99.Default\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeMgr.h">
+      <Filter>02.Manager\1.Time</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicDev.h">
+      <Filter>02.Manager\0.Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>03.DXObject\0.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>03.DXObject\1.Sampler</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>03.DXObject\2.Buffer\0.ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>03.DXObject\2.Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +135,22 @@
       <Filter>00.MainFrm\RenderThread</Filter>
     </ClCompile>
     <ClCompile Include="TimeMgr.cpp">
-      <Filter>02.Manager</Filter>
+      <Filter>02.Manager\1.Time</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicDev.cpp">
+      <Filter>02.Manager\0.Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>03.DXObject\0.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>03.DXObject\1.Sampler</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>03.DXObject\2.Buffer\0.ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>03.DXObject\2.Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
