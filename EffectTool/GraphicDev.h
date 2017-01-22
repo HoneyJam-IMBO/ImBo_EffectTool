@@ -25,26 +25,26 @@ public:
 	ID3D11DepthStencilView*	m_pd3dDepthStencilView{ nullptr };
 
 	//---------------------------deferred rendering-----------------------
-	ID3D11Texture2D			 *m_pd3dtxtColorSpecInt;//0
-	ID3D11Texture2D			 *m_pd3dtxtNormal;//1
-	ID3D11Texture2D			 *m_pd3dtxtSpecPow;//2
+	ID3D11Texture2D			 *m_pd3dtxtColorSpecInt{ nullptr };//0
+	ID3D11Texture2D			 *m_pd3dtxtNormal{ nullptr };//1
+	ID3D11Texture2D			 *m_pd3dtxtSpecPow{ nullptr };//2
 
 
-	ID3D11ShaderResourceView *m_pd3dsrvColorSpecInt;//0
-	ID3D11ShaderResourceView *m_pd3dsrvNormal;//1
-	ID3D11ShaderResourceView *m_pd3dsrvSpecPow;//2
+	ID3D11ShaderResourceView *m_pd3dsrvColorSpecInt{ nullptr };//0
+	ID3D11ShaderResourceView *m_pd3dsrvNormal{ nullptr };//1
+	ID3D11ShaderResourceView *m_pd3dsrvSpecPow{ nullptr };//2
 
-	ID3D11RenderTargetView   *m_pd3drtvColorSpecInt;//0
-	ID3D11RenderTargetView   *m_pd3drtvNormal;//1
-	ID3D11RenderTargetView   *m_pd3drtvSpecPow;//2
+	ID3D11RenderTargetView   *m_pd3drtvColorSpecInt{ nullptr };//0
+	ID3D11RenderTargetView   *m_pd3drtvNormal{ nullptr };//1
+	ID3D11RenderTargetView   *m_pd3drtvSpecPow{ nullptr };//2
 
 	vector<shared_ptr<CTexture>> m_vObjectLayerResultTexture;
 	vector<shared_ptr<CTexture>> m_vLightLayerResultTexture;
 
 	//--------------------------light render target----------------
-	ID3D11Texture2D			 *m_pd3dtxtLight;
-	ID3D11ShaderResourceView *m_pd3dsrvLight;
-	ID3D11RenderTargetView   *m_pd3drtvLight;
+	ID3D11Texture2D			 *m_pd3dtxtLight{ nullptr };
+	ID3D11ShaderResourceView *m_pd3dsrvLight{ nullptr };
+	ID3D11RenderTargetView   *m_pd3drtvLight{ nullptr };
 	//--------------------------light render target----------------
 
 public:

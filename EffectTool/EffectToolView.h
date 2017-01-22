@@ -4,6 +4,9 @@
 
 #pragma once
 
+#define RENDER_TARGET_NUMBER 3
+
+class CGraphicDev;
 class CRenderThread;
 class CEffectToolDoc;
 class CEffectToolView : public CView
@@ -23,6 +26,7 @@ public:
 	HANDLE		m_RenderEvent;
 
 	CRenderThread*	m_pThread;
+	CGraphicDev*	m_pGraphicDev;
 // 재정의입니다.
 public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.

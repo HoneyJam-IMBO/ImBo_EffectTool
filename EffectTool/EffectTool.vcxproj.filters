@@ -55,6 +55,15 @@
     <Filter Include="03.DXObject\2.Buffer\0.ConstantBuffer">
       <UniqueIdentifier>{eb70aa65-0e0d-4e09-9833-facb81eab8ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.DXObject\3.PostProcessingLayer">
+      <UniqueIdentifier>{709abdb3-cba6-4ecb-b4bb-df7367a38e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject\4.Light">
+      <UniqueIdentifier>{6bc3be1a-a235-4048-990e-8e4c1fa03ede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject\4.Light\0.DirectionLight">
+      <UniqueIdentifier>{97c796ae-13ee-4d54-a9c3-e8f91b65df8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -111,12 +120,18 @@
     <ClInclude Include="Buffer.h">
       <Filter>03.DXObject\2.Buffer</Filter>
     </ClInclude>
+    <ClInclude Include="MyStruct.h">
+      <Filter>99.Default\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>03.DXObject\4.Light</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>03.DXObject\4.Light\0.DirectionLight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
-      <Filter>99.Default\소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
       <Filter>99.Default\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="EffectToolDoc.cpp">
@@ -151,6 +166,15 @@
     </ClCompile>
     <ClCompile Include="Buffer.cpp">
       <Filter>03.DXObject\2.Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99.Default\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>03.DXObject\4.Light</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>03.DXObject\4.Light\0.DirectionLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

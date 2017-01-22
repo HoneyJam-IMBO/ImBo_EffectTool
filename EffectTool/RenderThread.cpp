@@ -24,8 +24,6 @@ void CRenderThread::Initialize()
 
 DWORD WINAPI CRenderThread::FuncThread(LPVOID arg)
 {
-
-
 	CRenderThread*	pMyThread = (CRenderThread*)arg;
 	while(true)
 	{
