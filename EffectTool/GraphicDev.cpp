@@ -15,7 +15,6 @@ void CGraphicDev::InitDevice()
 {
 	GetClientRect(g_hWnd, &m_rcClient);
 	CreateD3D11Deivce();
-	CreateRenderTargetView();
 }
 
 bool CGraphicDev::CreateD3D11Deivce()
@@ -415,36 +414,4 @@ bool CGraphicDev::CreateRenderTargetView()
 
 void CGraphicDev::ReleaseForwardRenderTargets()
 {
-	m_vObjectLayerResultTexture.clear();
-	m_vLightLayerResultTexture.clear();
-
-	if (m_pd3dtxtColorSpecInt) m_pd3dtxtColorSpecInt->Release();//0
-	m_pd3dtxtColorSpecInt = nullptr;
-
-	if (m_pd3dtxtNormal) m_pd3dtxtNormal->Release();//1
-	m_pd3dtxtNormal = nullptr;
-
-	if (m_pd3dtxtSpecPow) m_pd3dtxtSpecPow->Release();//2
-	m_pd3dtxtSpecPow = nullptr;
-
-	if (m_pd3dsrvColorSpecInt) m_pd3dsrvColorSpecInt->Release();//0
-	m_pd3dsrvColorSpecInt = nullptr;
-
-	if (m_pd3dsrvNormal) m_pd3dsrvNormal->Release();//1
-	m_pd3dsrvNormal = nullptr;
-
-	if (m_pd3dsrvSpecPow) m_pd3dsrvSpecPow->Release();//2
-	m_pd3dsrvSpecPow = nullptr;
-
-	if (m_pd3drtvColorSpecInt) m_pd3drtvColorSpecInt->Release();//0
-	m_pd3drtvColorSpecInt = nullptr;
-
-	if (m_pd3drtvNormal) m_pd3drtvNormal->Release();//1
-	m_pd3drtvNormal = nullptr;
-
-	if (m_pd3drtvSpecPow) m_pd3drtvSpecPow->Release();//2
-	m_pd3drtvSpecPow = nullptr;
-
-	if (m_pd3drtvLight) m_pd3drtvLight->Release();
-	m_pd3drtvLight = nullptr;
 }
