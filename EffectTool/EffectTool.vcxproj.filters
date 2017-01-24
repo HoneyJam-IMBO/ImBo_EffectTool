@@ -55,6 +55,12 @@
     <Filter Include="03.DXObject\2.Buffer\0.ConstantBuffer">
       <UniqueIdentifier>{eb70aa65-0e0d-4e09-9833-facb81eab8ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.DXObject\3.Light">
+      <UniqueIdentifier>{df1f3e69-856e-46cc-9d96-b35190dba9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.DXObject\3.Light\0.DirectionaLight">
+      <UniqueIdentifier>{c2ab56c7-652b-4bd1-aae5-9795f673cd09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -111,6 +117,12 @@
     <ClInclude Include="Buffer.h">
       <Filter>03.DXObject\2.Buffer</Filter>
     </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>03.DXObject\3.Light\0.DirectionaLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>03.DXObject\3.Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -151,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="Buffer.cpp">
       <Filter>03.DXObject\2.Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>03.DXObject\3.Light\0.DirectionaLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>03.DXObject\3.Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

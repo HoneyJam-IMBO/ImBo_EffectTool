@@ -13,6 +13,8 @@
 #include "EffectToolView.h"
 #include "MainFrm.h"
 #include "RenderThread.h"
+#include "GraphicDev.h"
+#include "DirectionalLight.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -45,6 +47,7 @@ CEffectToolView::~CEffectToolView()
 	CloseHandle(m_LoopEvent);
 	CloseHandle(m_RenderEvent);
 	delete m_pThread;
+	m_pGraphicDev->DestroyInstance();
 }
 
 BOOL CEffectToolView::PreCreateWindow(CREATESTRUCT& cs)
@@ -71,6 +74,15 @@ void CEffectToolView::OnInitialUpdate()
 	/////////////////////////////////////////////////////
 	g_hWnd = m_hWnd;
 
+
+	m_pGraphicDev = CGraphicDev::GetInstance();
+	m_pGraphicDev->InitDevice();
+
+	m_pDirectionalLight = new CDirectionalLight;
+	m_pDirectionalLight->Begin(DIRECTIONAL_AMBIENT_LIGHT{
+		XMFLOAT4(1.0f, -1.0f, 1.0f, 0.0f),XMFLOAT4(0.0, 0.1, 0.1, 0.0) , XMFLOAT4(1.5f, 1.5f, 1.5f, 1),//dir
+		XMFLOAT4(0.1, 0.1, 0.1, 1), XMFLOAT4(0.1f, 0.1f, 0.1f, 1), XMFLOAT4(0.1f, 0.1f, 0.1f, 1), XMFLOAT4(5.1f, 5.1f, 5.1f, 1)//ambient
+	});
 }
 
 // CEffectToolView 그리기
@@ -85,8 +97,35 @@ void CEffectToolView::OnDraw(CDC* /*pDC*/)
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 	WaitForSingleObject(m_RenderEvent, INFINITE);
 
+	m_pGraphicDev->m_pd3dDeviceContext->ClearDepthStencilView(m_pGraphicDev->m_pd3dDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	ID3D11RenderTargetView *pd3dRTVs[RENDER_TARGET_NUMBER] = { m_pGraphicDev->m_pd3drtvColorSpecInt, m_pGraphicDev->m_pd3drtvNormal, m_pGraphicDev->m_pd3drtvSpecPow };
+	float fClearColor[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
+	if (m_pGraphicDev->m_pd3drtvColorSpecInt)
+		m_pGraphicDev->m_pd3dDeviceContext->ClearRenderTargetView(m_pGraphicDev->m_pd3drtvColorSpecInt, fClearColor);
+	if (m_pGraphicDev->m_pd3drtvNormal)
+		m_pGraphicDev->m_pd3dDeviceContext->ClearRenderTargetView(m_pGraphicDev->m_pd3drtvNormal, fClearColor);
+	if (m_pGraphicDev->m_pd3drtvSpecPow)
+		m_pGraphicDev->m_pd3dDeviceContext->ClearRenderTargetView(m_pGraphicDev->m_pd3drtvSpecPow, fClearColor);
+
+	m_pGraphicDev->m_pd3dDeviceContext->OMSetRenderTargets(RENDER_TARGET_NUMBER, pd3dRTVs, m_pGraphicDev->m_pd3dDepthStencilView);
+
+
+	//Light
+	m_pGraphicDev->m_pd3dDeviceContext->ClearDepthStencilView(m_pGraphicDev->m_pd3dDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	m_pGraphicDev->m_pd3dDeviceContext->OMSetRenderTargets(1, &m_pGraphicDev->m_pd3drtvLight, m_pGraphicDev->m_pd3dDepthStencilView);
+
+	for (auto texture : m_pGraphicDev->m_vObjectLayerResultTexture) {
+		texture->SetShaderState();
+	}
+	//m_stackScene.top()->LightRender();
+	for (auto texture : m_pGraphicDev->m_vObjectLayerResultTexture) {
+		texture->CleanShaderState();
+
+	}
+
 	int k = 0;
 
+	m_pGraphicDev->m_pdxgiSwapChain->Present(0, 0);
 	SetEvent(m_LoopEvent);
 }
 
