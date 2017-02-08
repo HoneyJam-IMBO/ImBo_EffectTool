@@ -194,39 +194,87 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\0208 buffer 정리\DXMain\Layer.h" />
+    <ClInclude Include="..\..\0208 buffer 정리\DXMain\RenderShader.h" />
     <ClInclude Include="Buffer.h" />
-    <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="ComputeShader.h" />
+    <ClInclude Include="CSBloom.h" />
+    <ClInclude Include="CSHorizontalBlur.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="DownScaleFirstPass.h" />
+    <ClInclude Include="DownScaleSecondPass.h" />
+    <ClInclude Include="DXObject.h" />
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GlobalValueManager.h" />
     <ClInclude Include="GraphicDev.h" />
     <ClInclude Include="IncludeHeader.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LightLayer.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="MyFormView.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectLayer.h" />
+    <ClInclude Include="PostProcessingLayer.h" />
+    <ClInclude Include="RenderContainer.h" />
+    <ClInclude Include="RenderContainerSeller.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderThread.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sampler.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="SingleTon.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeMgr.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\0208 buffer 정리\DXMain\Layer.cpp" />
+    <ClCompile Include="..\..\0208 buffer 정리\DXMain\RenderShader.cpp" />
     <ClCompile Include="Buffer.cpp" />
-    <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ComputeShader.cpp" />
+    <ClCompile Include="CSBloom.cpp" />
+    <ClCompile Include="CSHorizontalBlur.cpp" />
+    <ClCompile Include="CSVerticalBlur.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="DownScaleFirstPass.cpp" />
+    <ClCompile Include="DownScaleSecondPass.cpp" />
+    <ClCompile Include="DXObject.cpp" />
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GlobalValueManager.cpp" />
     <ClCompile Include="GraphicDev.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LightLayer.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MyFormView.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectLayer.cpp" />
+    <ClCompile Include="PostProcessingLayer.cpp" />
+    <ClCompile Include="RenderContainer.cpp" />
+    <ClCompile Include="RenderContainerSeller.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderThread.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sampler.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -248,6 +296,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\EffectTool.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="CSVerticalBlur.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,21 +7,6 @@
     <Filter Include="01.View">
       <UniqueIdentifier>{e44f4a88-fd14-4777-a075-286ace13de83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99.Default">
-      <UniqueIdentifier>{49816f1a-887a-4cc8-b128-32947f0c0754}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="99.Default\리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="99.Default\소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="99.Default\헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="01.View\0.MainView">
       <UniqueIdentifier>{cbf63e70-f0da-496e-aa40-517c6b29f85a}</UniqueIdentifier>
     </Filter>
@@ -40,26 +25,113 @@
     <Filter Include="02.Manager\1.Time">
       <UniqueIdentifier>{0352a97a-af0c-4cb0-a0f7-b471e3279575}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.DXObject">
+    <Filter Include="Framework">
+      <UniqueIdentifier>{1f7cf299-85e7-4cfd-8be5-d8705bf7bc9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\99.Default">
+      <UniqueIdentifier>{49816f1a-887a-4cc8-b128-32947f0c0754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\99.Default\리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Framework\99.Default\소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Framework\99.Default\헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Framework\01.DXObject">
       <UniqueIdentifier>{c87f9ba2-d625-4269-8454-7998dcc28a88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.DXObject\0.Texture">
-      <UniqueIdentifier>{f5694a75-d583-4531-86a1-1250660d4d03}</UniqueIdentifier>
+    <Filter Include="Framework\01.DXObject\-1.Scene">
+      <UniqueIdentifier>{a09cb21e-2825-4d9b-bf0e-f391f729c31d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.DXObject\1.Sampler">
-      <UniqueIdentifier>{94ce23ff-2aae-49f4-9615-353acb8b8b6a}</UniqueIdentifier>
+    <Filter Include="Framework\01.DXObject\-1.Scene\SceneMain">
+      <UniqueIdentifier>{aa575157-3655-4003-b216-012327fe27b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.DXObject\2.Buffer">
-      <UniqueIdentifier>{b6ea6447-81a8-46c8-beda-eff56e106548}</UniqueIdentifier>
+    <Filter Include="Framework\01.DXObject\-2.Container">
+      <UniqueIdentifier>{1b7bf027-ddb8-407b-b943-7238b80d356b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.DXObject\2.Buffer\0.ConstantBuffer">
-      <UniqueIdentifier>{eb70aa65-0e0d-4e09-9833-facb81eab8ea}</UniqueIdentifier>
+    <Filter Include="Framework\01.DXObject\-3.Material">
+      <UniqueIdentifier>{c28f2ddb-6ed3-4216-a844-cd27b5cc8548}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.DXObject\3.Light">
-      <UniqueIdentifier>{df1f3e69-856e-46cc-9d96-b35190dba9e7}</UniqueIdentifier>
+    <Filter Include="Framework\01.DXObject\-4.Texture">
+      <UniqueIdentifier>{9df9efb6-cc58-4947-9baa-9e0e9a417ec7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.DXObject\3.Light\0.DirectionaLight">
-      <UniqueIdentifier>{c2ab56c7-652b-4bd1-aae5-9795f673cd09}</UniqueIdentifier>
+    <Filter Include="Framework\01.DXObject\-5.Buffer">
+      <UniqueIdentifier>{32210d50-0a4f-42fb-8858-46cea4daeb95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-6.Layer">
+      <UniqueIdentifier>{e1c1ddd8-facb-4413-b155-ba9c4b62fa89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-6.Layer\0.LightLayer">
+      <UniqueIdentifier>{c7f00f4c-8e81-46a4-967a-d404d249e2be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-6.Layer\1.ObjLayer">
+      <UniqueIdentifier>{4d4d75e5-bb29-4557-b5cc-5898f126ceb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-6.Layer\2.PostProcessingLayer">
+      <UniqueIdentifier>{1f8d7f1a-7596-4bad-839d-50efd914a782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-4.Texture\0.Sampler">
+      <UniqueIdentifier>{76e517eb-7b88-47e4-8a5d-c8ad16767360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-4.Texture\1.Texture">
+      <UniqueIdentifier>{dbd71ed4-f152-43bc-bc28-fcce63f26f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\00.Object">
+      <UniqueIdentifier>{d20d5f4e-1e37-4510-94a4-50a294232ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.GameObject">
+      <UniqueIdentifier>{d6299a6d-eb6c-49f0-8ed6-7e8998910b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.GameObject\0.Light">
+      <UniqueIdentifier>{62fd12ca-dd89-4414-998c-1a97c70fd4a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.GameObject\0.Light\DirectionalLight">
+      <UniqueIdentifier>{44e92f74-5cb2-4dab-860a-e4b2c89a78ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\2.RenderContainerSeller">
+      <UniqueIdentifier>{f8e06aef-9b2c-42ab-8677-3795fa3d64c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\3.Renderer">
+      <UniqueIdentifier>{2b77ab9f-d7af-4571-b34b-eadd289bd530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\4.ResourceMgr">
+      <UniqueIdentifier>{48bdc0f6-eb0e-46eb-9e3e-6b195261d1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\03.Component">
+      <UniqueIdentifier>{cf8285bb-2148-47b8-b6df-2caffd6799ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-7.Camera">
+      <UniqueIdentifier>{2341825a-2070-4875-b72d-5626063ab470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-8.Shader">
+      <UniqueIdentifier>{703a3887-2f19-4fa8-a7e7-f944f6092de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-8.Shader\ComputeShader">
+      <UniqueIdentifier>{19926425-d59f-4466-bc04-257d47751e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-8.Shader\RenderShader">
+      <UniqueIdentifier>{84249384-f42b-4fb6-a2df-085826e7c1fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing">
+      <UniqueIdentifier>{8bb9d64e-e662-4b3a-bc9e-02cee7e9c042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Bloom">
+      <UniqueIdentifier>{af847bad-cf8e-4318-b4f4-b4a8c8ede363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Blur">
+      <UniqueIdentifier>{065faa92-3472-4df3-a01c-7444d69dcac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\ToneMapping">
+      <UniqueIdentifier>{d54dee11-43cc-488c-aaec-e918fd39d079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\5.GlobalValueMgr">
+      <UniqueIdentifier>{c50cb968-e5be-49f5-8eb7-1380a9fb31e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,19 +139,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
-      <Filter>99.Default\헤더 파일</Filter>
+      <Filter>Framework\99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>99.Default\헤더 파일</Filter>
+      <Filter>Framework\99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>99.Default\헤더 파일</Filter>
+      <Filter>Framework\99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="EffectToolDoc.h">
-      <Filter>99.Default\헤더 파일</Filter>
+      <Filter>Framework\99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>99.Default\헤더 파일</Filter>
+      <Filter>Framework\99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="MainFrm.h">
       <Filter>00.MainFrm</Filter>
@@ -94,10 +166,10 @@
       <Filter>00.MainFrm\RenderThread</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>99.Default\헤더 파일</Filter>
+      <Filter>Framework\99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="IncludeHeader.h">
-      <Filter>99.Default\헤더 파일</Filter>
+      <Filter>Framework\99.Default\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TimeMgr.h">
       <Filter>02.Manager\1.Time</Filter>
@@ -105,34 +177,106 @@
     <ClInclude Include="GraphicDev.h">
       <Filter>02.Manager\0.Device</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>03.DXObject\0.Texture</Filter>
+    <ClInclude Include="Object.h">
+      <Filter>Framework\00.Object</Filter>
     </ClInclude>
-    <ClInclude Include="Sampler.h">
-      <Filter>03.DXObject\1.Sampler</Filter>
+    <ClInclude Include="Scene.h">
+      <Filter>Framework\01.DXObject\-1.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>03.DXObject\2.Buffer\0.ConstantBuffer</Filter>
+    <ClInclude Include="SceneMain.h">
+      <Filter>Framework\01.DXObject\-1.Scene\SceneMain</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContainer.h">
+      <Filter>Framework\01.DXObject\-2.Container</Filter>
+    </ClInclude>
+    <ClInclude Include="DXObject.h">
+      <Filter>Framework\01.DXObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Framework\01.DXObject\-3.Material</Filter>
     </ClInclude>
     <ClInclude Include="Buffer.h">
-      <Filter>03.DXObject\2.Buffer</Filter>
+      <Filter>Framework\01.DXObject\-5.Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
-      <Filter>03.DXObject\3.Light\0.DirectionaLight</Filter>
+    <ClInclude Include="..\..\0208 buffer 정리\DXMain\Layer.h">
+      <Filter>Framework\01.DXObject\-6.Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Framework\01.DXObject\-4.Texture\1.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>Framework\01.DXObject\-4.Texture\0.Sampler</Filter>
+    </ClInclude>
+    <ClInclude Include="LightLayer.h">
+      <Filter>Framework\01.DXObject\-6.Layer\0.LightLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectLayer.h">
+      <Filter>Framework\01.DXObject\-6.Layer\1.ObjLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessingLayer.h">
+      <Filter>Framework\01.DXObject\-6.Layer\2.PostProcessingLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Framework\02.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
-      <Filter>03.DXObject\3.Light</Filter>
+      <Filter>Framework\02.GameObject\0.Light</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Framework\02.GameObject\0.Light\DirectionalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTon.h">
+      <Filter>02.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContainerSeller.h">
+      <Filter>02.Manager\2.RenderContainerSeller</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>02.Manager\3.Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>02.Manager\4.ResourceMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Framework\03.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Framework\01.DXObject\-7.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Framework\01.DXObject\-8.Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShader.h">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\0208 buffer 정리\DXMain\RenderShader.h">
+      <Filter>Framework\01.DXObject\-8.Shader\RenderShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CSBloom.h">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="CSHorizontalBlur.h">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="DownScaleFirstPass.h">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\ToneMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="DownScaleSecondPass.h">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\ToneMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalValueManager.h">
+      <Filter>02.Manager\5.GlobalValueMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
-      <Filter>99.Default\소스 파일</Filter>
+      <Filter>Framework\99.Default\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>99.Default\소스 파일</Filter>
+      <Filter>Framework\99.Default\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="EffectToolDoc.cpp">
-      <Filter>99.Default\소스 파일</Filter>
+      <Filter>Framework\99.Default\소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MainFrm.cpp">
       <Filter>00.MainFrm</Filter>
@@ -152,50 +296,127 @@
     <ClCompile Include="GraphicDev.cpp">
       <Filter>02.Manager\0.Device</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>03.DXObject\0.Texture</Filter>
+    <ClCompile Include="Object.cpp">
+      <Filter>Framework\00.Object</Filter>
     </ClCompile>
-    <ClCompile Include="Sampler.cpp">
-      <Filter>03.DXObject\1.Sampler</Filter>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Framework\01.DXObject\-1.Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>03.DXObject\2.Buffer\0.ConstantBuffer</Filter>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>Framework\01.DXObject\-1.Scene\SceneMain</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContainer.cpp">
+      <Filter>Framework\01.DXObject\-2.Container</Filter>
+    </ClCompile>
+    <ClCompile Include="DXObject.cpp">
+      <Filter>Framework\01.DXObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Framework\01.DXObject\-3.Material</Filter>
     </ClCompile>
     <ClCompile Include="Buffer.cpp">
-      <Filter>03.DXObject\2.Buffer</Filter>
+      <Filter>Framework\01.DXObject\-5.Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
-      <Filter>03.DXObject\3.Light\0.DirectionaLight</Filter>
+    <ClCompile Include="..\..\0208 buffer 정리\DXMain\Layer.cpp">
+      <Filter>Framework\01.DXObject\-6.Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Framework\01.DXObject\-4.Texture\1.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>Framework\01.DXObject\-4.Texture\0.Sampler</Filter>
+    </ClCompile>
+    <ClCompile Include="LightLayer.cpp">
+      <Filter>Framework\01.DXObject\-6.Layer\0.LightLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectLayer.cpp">
+      <Filter>Framework\01.DXObject\-6.Layer\1.ObjLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessingLayer.cpp">
+      <Filter>Framework\01.DXObject\-6.Layer\2.PostProcessingLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Framework\02.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
-      <Filter>03.DXObject\3.Light</Filter>
+      <Filter>Framework\02.GameObject\0.Light</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Framework\02.GameObject\0.Light\DirectionalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContainerSeller.cpp">
+      <Filter>02.Manager\2.RenderContainerSeller</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>02.Manager\3.Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>02.Manager\4.ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Framework\03.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Framework\01.DXObject\-7.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeShader.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\0208 buffer 정리\DXMain\RenderShader.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader\RenderShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CSBloom.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="CSHorizontalBlur.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Blur</Filter>
+    </ClCompile>
+    <ClCompile Include="CSVerticalBlur.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Blur</Filter>
+    </ClCompile>
+    <ClCompile Include="DownScaleFirstPass.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\ToneMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="DownScaleSecondPass.cpp">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\ToneMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalValueManager.cpp">
+      <Filter>02.Manager\5.GlobalValueMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">
-      <Filter>99.Default\리소스 파일</Filter>
+      <Filter>Framework\99.Default\리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="UserImages.bmp">
-      <Filter>99.Default\리소스 파일</Filter>
+      <Filter>Framework\99.Default\리소스 파일</Filter>
     </Image>
     <Image Include="res\EffectToolDoc.ico">
-      <Filter>99.Default\리소스 파일</Filter>
+      <Filter>Framework\99.Default\리소스 파일</Filter>
     </Image>
     <Image Include="res\EffectTool.ico">
-      <Filter>99.Default\리소스 파일</Filter>
+      <Filter>Framework\99.Default\리소스 파일</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">
-      <Filter>99.Default\리소스 파일</Filter>
+      <Filter>Framework\99.Default\리소스 파일</Filter>
     </Image>
     <Image Include="res\Toolbar256.bmp">
-      <Filter>99.Default\리소스 파일</Filter>
+      <Filter>Framework\99.Default\리소스 파일</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\EffectTool.rc2">
-      <Filter>99.Default\리소스 파일</Filter>
+      <Filter>Framework\99.Default\리소스 파일</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="CSVerticalBlur.hlsl">
+      <Filter>Framework\01.DXObject\-8.Shader\ComputeShader\PostProcessing\Blur</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

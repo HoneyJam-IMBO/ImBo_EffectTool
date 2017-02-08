@@ -118,6 +118,8 @@ void CEffectToolView::OnDraw(CDC* /*pDC*/)
 		texture->SetShaderState();
 	}
 	//m_stackScene.top()->LightRender();
+
+
 	for (auto texture : m_pGraphicDev->m_vObjectLayerResultTexture) {
 		texture->CleanShaderState();
 

@@ -1,9 +1,8 @@
 #include "stdafx.h"
 #include "Texture.h"
 
-
 //array
-bool CTexture::Begin(UINT nTextures, _TCHAR(*ppstrFilePaths)[128], shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CConstantBuffer> pConstantBuffer)
+bool CTexture::Begin(UINT nTextures, _TCHAR(*ppstrFilePaths)[128], shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CBuffer> pConstantBuffer)
 {
 	//sampler
 	m_pSampler = pSampler;
@@ -17,7 +16,7 @@ bool CTexture::Begin(UINT nTextures, _TCHAR(*ppstrFilePaths)[128], shared_ptr<CS
 
 	return true;
 }
-bool CTexture::Begin(UINT nTextures, ID3D11Texture2D **ppd3dTextures, shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CConstantBuffer> pConstantBuffer)
+bool CTexture::Begin(UINT nTextures, ID3D11Texture2D **ppd3dTextures, shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CBuffer> pConstantBuffer)
 {
 	//sampler
 	m_pSampler = pSampler;
@@ -33,7 +32,10 @@ bool CTexture::Begin(UINT nTextures, ID3D11Texture2D **ppd3dTextures, shared_ptr
 }
 
 //from file
-bool CTexture::Begin(_TCHAR(pstrFilePath)[128], shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CConstantBuffer> pConstantBuffer) {
+bool CTexture::Begin(_TCHAR(pstrFilePath)[128], shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CBuffer> pConstantBuffer){
+	wstring path{ pstrFilePath };
+	m_sPath.assign(path.cbegin(), path.cend());
+
 	//sampler
 	m_pSampler = pSampler;
 	//constant buffer
@@ -41,14 +43,14 @@ bool CTexture::Begin(_TCHAR(pstrFilePath)[128], shared_ptr<CSampler> pSampler, U
 
 	//texture
 	m_TextureStartSlot = Slot;
-	D3DX11CreateShaderResourceViewFromFile(m_pd3dDevice, pstrFilePath, NULL, NULL, &m_pd3dsrvTexture, NULL);
+	D3DX11CreateShaderResourceViewFromFile(GLOBALVALUEMGR->GetDevice(), pstrFilePath, NULL, NULL, &m_pd3dsrvTexture, NULL);
 	m_BindFlag = BindFlag;
-
-
+	
+	
 	return true;
 }
 //from srv
-bool CTexture::Begin(ID3D11ShaderResourceView* pShaderResourceView, shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CConstantBuffer> pConstantBuffer) {
+bool CTexture::Begin(ID3D11ShaderResourceView* pShaderResourceView, shared_ptr<CSampler> pSampler, UINT Slot, UINT BindFlag, shared_ptr<CBuffer> pConstantBuffer) {
 	//sampler
 	m_pSampler = pSampler;
 	//constant buffer
@@ -74,63 +76,63 @@ bool CTexture::End() {
 	}
 
 	//texture
-	if (m_pd3dsrvTexture) m_pd3dsrvTexture->Release();
+		if (m_pd3dsrvTexture) m_pd3dsrvTexture->Release();
 
 	return true;
 }
 
 void CTexture::SetShaderState() {
 	//sampler
-	if (m_pSampler) m_pSampler->SetShaderState();
+	if(m_pSampler) m_pSampler->SetShaderState();
 	//constant buffer
-	if (m_pConstantBuffer) m_pConstantBuffer->SetShaderState();
+	if(m_pConstantBuffer) m_pConstantBuffer->SetShaderState();
 
 	//texture
-	if (m_BindFlag & BIND_VS) {
-		m_pd3dDeviceContext->VSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
-	}
-	if (m_BindFlag & BIND_DS) {
-		m_pd3dDeviceContext->DSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
-	}
-	if (m_BindFlag & BIND_HS) {
-		m_pd3dDeviceContext->HSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
-	}
-	if (m_BindFlag & BIND_GS) {
-		m_pd3dDeviceContext->GSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
-	}
-	if (m_BindFlag & BIND_PS) {
-		m_pd3dDeviceContext->PSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
-	}
-	if (m_BindFlag & BIND_CS) {
-		m_pd3dDeviceContext->CSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
-	}
+		if (m_BindFlag & BIND_VS) {
+			GLOBALVALUEMGR->GetDeviceContext()->VSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
+		}
+		if (m_BindFlag & BIND_DS) {
+			GLOBALVALUEMGR->GetDeviceContext()->DSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
+		}
+		if (m_BindFlag & BIND_HS) {
+			GLOBALVALUEMGR->GetDeviceContext()->HSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
+		}
+		if (m_BindFlag & BIND_GS) {
+			GLOBALVALUEMGR->GetDeviceContext()->GSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
+		}
+		if (m_BindFlag & BIND_PS) {
+			GLOBALVALUEMGR->GetDeviceContext()->PSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
+		}
+		if (m_BindFlag & BIND_CS) {
+			GLOBALVALUEMGR->GetDeviceContext()->CSSetShaderResources(m_TextureStartSlot, 1, &m_pd3dsrvTexture);
+		}
 }
 void CTexture::CleanShaderState() {
 	//sampler
-	if (m_pSampler) m_pSampler->CleanShaderState();
+	if(m_pSampler) m_pSampler->CleanShaderState();
 	//constant buffer
-	if (m_pConstantBuffer) m_pConstantBuffer->CleanShaderState();
+	if(m_pConstantBuffer) m_pConstantBuffer->CleanShaderState();
 
 	//texture
 	ID3D11ShaderResourceView* pSRVs[1] = { nullptr };
-	if (m_BindFlag & BIND_VS) {
-		m_pd3dDeviceContext->VSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
-	}
-	if (m_BindFlag & BIND_DS) {
-		m_pd3dDeviceContext->DSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
-	}
-	if (m_BindFlag & BIND_HS) {
-		m_pd3dDeviceContext->HSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
-	}
-	if (m_BindFlag & BIND_GS) {
-		m_pd3dDeviceContext->GSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
-	}
-	if (m_BindFlag & BIND_PS) {
-		m_pd3dDeviceContext->PSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
-	}
-	if (m_BindFlag & BIND_CS) {
-		m_pd3dDeviceContext->CSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
-	}
+		if (m_BindFlag & BIND_VS) {
+			GLOBALVALUEMGR->GetDeviceContext()->VSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
+		}
+		if (m_BindFlag & BIND_DS) {
+			GLOBALVALUEMGR->GetDeviceContext()->DSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
+		}
+		if (m_BindFlag & BIND_HS) {
+			GLOBALVALUEMGR->GetDeviceContext()->HSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
+		}
+		if (m_BindFlag & BIND_GS) {
+			GLOBALVALUEMGR->GetDeviceContext()->GSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
+		}
+		if (m_BindFlag & BIND_PS) {
+			GLOBALVALUEMGR->GetDeviceContext()->PSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
+		}
+		if (m_BindFlag & BIND_CS) {
+			GLOBALVALUEMGR->GetDeviceContext()->CSSetShaderResources(m_TextureStartSlot, 1, pSRVs);
+		}
 
 }
 
@@ -141,17 +143,17 @@ void CTexture::UpdateShaderState() {
 
 
 
-void CTexture::SetSampler(shared_ptr<CSampler> pSampler) {
+void CTexture::SetSampler(shared_ptr<CSampler> pSampler){
 	if (!pSampler) return;
 	m_pSampler = pSampler;
 }
-void CTexture::SetConstantBuffer(shared_ptr<CConstantBuffer> pConstantBuffer) {
+void CTexture::SetConstantBuffer(shared_ptr<CBuffer> pConstantBuffer) {
 	if (!pConstantBuffer) return;
 	m_pConstantBuffer = pConstantBuffer;
 }
 
-ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(_TCHAR(*ppstrFilePaths)[128], UINT nTextures) {
-
+ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(_TCHAR(*ppstrFilePaths)[128], UINT nTextures){
+	
 	D3DX11_IMAGE_LOAD_INFO d3dxImageLoadInfo;
 	d3dxImageLoadInfo.Width = D3DX11_FROM_FILE;
 	d3dxImageLoadInfo.Height = D3DX11_FROM_FILE;
@@ -168,7 +170,7 @@ ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(_TCHAR(*ppstrFilePat
 	d3dxImageLoadInfo.pSrcInfo = 0;
 
 	ID3D11Texture2D **ppd3dTextures = new ID3D11Texture2D*[nTextures];
-	for (UINT i = 0; i < nTextures; i++) D3DX11CreateTextureFromFile(m_pd3dDevice, ppstrFilePaths[i], &d3dxImageLoadInfo, 0, (ID3D11Resource **)&ppd3dTextures[i], 0);
+	for (UINT i = 0; i < nTextures; i++) D3DX11CreateTextureFromFile(GLOBALVALUEMGR->GetDevice(), ppstrFilePaths[i], &d3dxImageLoadInfo, 0, (ID3D11Resource **)&ppd3dTextures[i], 0);
 
 	D3D11_TEXTURE2D_DESC d3dTexure2DDesc;
 	ppd3dTextures[0]->GetDesc(&d3dTexure2DDesc);
@@ -187,17 +189,17 @@ ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(_TCHAR(*ppstrFilePat
 	d3dTexture2DArrayDesc.MiscFlags = 0;
 
 	ID3D11Texture2D *pd3dTexture2DArray;
-	m_pd3dDevice->CreateTexture2D(&d3dTexture2DArrayDesc, 0, &pd3dTexture2DArray);
+	GLOBALVALUEMGR->GetDevice()->CreateTexture2D(&d3dTexture2DArrayDesc, 0, &pd3dTexture2DArray);
 
 	D3D11_MAPPED_SUBRESOURCE d3dMappedTexture2D;
 	for (UINT t = 0; t < nTextures; t++)
 	{
 		for (UINT m = 0; m < d3dTexure2DDesc.MipLevels; m++)
 		{
-			//? map 왜 함? 병신임?
-			m_pd3dDeviceContext->Map(ppd3dTextures[t], m, D3D11_MAP_READ, 0, &d3dMappedTexture2D);
-			m_pd3dDeviceContext->UpdateSubresource(pd3dTexture2DArray, D3D11CalcSubresource(m, t, d3dTexure2DDesc.MipLevels), 0, d3dMappedTexture2D.pData, d3dMappedTexture2D.RowPitch, d3dMappedTexture2D.DepthPitch);
-			m_pd3dDeviceContext->Unmap(ppd3dTextures[t], m);
+	//? map 왜 함? 병신임?
+			GLOBALVALUEMGR->GetDeviceContext()->Map(ppd3dTextures[t], m, D3D11_MAP_READ, 0, &d3dMappedTexture2D);
+			GLOBALVALUEMGR->GetDeviceContext()->UpdateSubresource(pd3dTexture2DArray, D3D11CalcSubresource(m, t, d3dTexure2DDesc.MipLevels), 0, d3dMappedTexture2D.pData, d3dMappedTexture2D.RowPitch, d3dMappedTexture2D.DepthPitch);
+			GLOBALVALUEMGR->GetDeviceContext()->Unmap(ppd3dTextures[t], m);
 		}
 	}
 
@@ -211,7 +213,7 @@ ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(_TCHAR(*ppstrFilePat
 	d3dTextureSRVDesc.Texture2DArray.ArraySize = nTextures;
 
 	ID3D11ShaderResourceView *pd3dsrvTextureArray;
-	m_pd3dDevice->CreateShaderResourceView(pd3dTexture2DArray, &d3dTextureSRVDesc, &pd3dsrvTextureArray);
+	GLOBALVALUEMGR->GetDevice()->CreateShaderResourceView(pd3dTexture2DArray, &d3dTextureSRVDesc, &pd3dsrvTextureArray);
 
 	if (pd3dTexture2DArray) pd3dTexture2DArray->Release();
 
@@ -255,7 +257,7 @@ ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(ID3D11Texture2D **pp
 	d3dTexture2DArrayDesc.MiscFlags = 0;
 
 	ID3D11Texture2D *pd3dTexture2DArray;
-	m_pd3dDevice->CreateTexture2D(&d3dTexture2DArrayDesc, 0, &pd3dTexture2DArray);
+	GLOBALVALUEMGR->GetDevice()->CreateTexture2D(&d3dTexture2DArrayDesc, 0, &pd3dTexture2DArray);
 
 	D3D11_MAPPED_SUBRESOURCE d3dMappedTexture2D;
 	for (UINT t = 0; t < nTextures; t++)
@@ -263,9 +265,9 @@ ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(ID3D11Texture2D **pp
 		for (UINT m = 0; m < d3dTexure2DDesc.MipLevels; m++)
 		{
 			//? map 왜 함? 병신임?
-			m_pd3dDeviceContext->Map(ppd3dTextures[t], m, D3D11_MAP_READ, 0, &d3dMappedTexture2D);
-			m_pd3dDeviceContext->UpdateSubresource(pd3dTexture2DArray, D3D11CalcSubresource(m, t, d3dTexure2DDesc.MipLevels), 0, d3dMappedTexture2D.pData, d3dMappedTexture2D.RowPitch, d3dMappedTexture2D.DepthPitch);
-			m_pd3dDeviceContext->Unmap(ppd3dTextures[t], m);
+			GLOBALVALUEMGR->GetDeviceContext()->Map(ppd3dTextures[t], m, D3D11_MAP_READ, 0, &d3dMappedTexture2D);
+			GLOBALVALUEMGR->GetDeviceContext()->UpdateSubresource(pd3dTexture2DArray, D3D11CalcSubresource(m, t, d3dTexure2DDesc.MipLevels), 0, d3dMappedTexture2D.pData, d3dMappedTexture2D.RowPitch, d3dMappedTexture2D.DepthPitch);
+			GLOBALVALUEMGR->GetDeviceContext()->Unmap(ppd3dTextures[t], m);
 		}
 	}
 
@@ -279,7 +281,7 @@ ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(ID3D11Texture2D **pp
 	d3dTextureSRVDesc.Texture2DArray.ArraySize = nTextures;
 
 	ID3D11ShaderResourceView *pd3dsrvTextureArray;
-	m_pd3dDevice->CreateShaderResourceView(pd3dTexture2DArray, &d3dTextureSRVDesc, &pd3dsrvTextureArray);
+	GLOBALVALUEMGR->GetDevice()->CreateShaderResourceView(pd3dTexture2DArray, &d3dTextureSRVDesc, &pd3dsrvTextureArray);
 
 	if (pd3dTexture2DArray) pd3dTexture2DArray->Release();
 
@@ -288,3 +290,7 @@ ID3D11ShaderResourceView* CTexture::CreateTexture2DArraySRV(ID3D11Texture2D **pp
 
 	return(pd3dsrvTextureArray);
 }
+
+CTexture::CTexture() : DXObject("texture") { }
+CTexture::~CTexture() { };
+
