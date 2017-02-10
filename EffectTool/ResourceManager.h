@@ -1,45 +1,11 @@
 #pragma once
 
 #include "SingleTon.h"
-#include "DirectXFramework.h"
-
-#include "Animater.h"//animater!!
 
 #include "DirectionalLightMesh.h"
-#include "PointLightMesh.h"
-#include "SpotLightMesh.h"
-#include "CapsuleLightMesh.h"
-#include "TestMesh.h"
-#include "PlaneMesh.h"
-#include "TestDeferredMesh.h"
-#include "SkyBoxMesh.h"//skybox
-#include "SpaceMesh.h"//space
-#include "TerrainMesh.h"//terrain
-#include "BoundingBoxMesh.h"//BoundingBox mesh
-#include "DebugTextureMesh.h"//debug texture mesh
-#include "CoordinateSysMesh.h"//CoordinateSystem Mesh
-#include "FileBasedMesh.h"//fbx mesh
-//#include "AnimationMesh.h"//animation mesh
-#include "MultiMesh.h"//multiMesh
-
-#include "TestObject.h"
 #include "Light.h"
 #include "DirectionalLight.h"
-#include "PointLight.h"
-#include "SpotLight.h"
-#include "CapsuleLight.h"
-#include "SkyBox.h"//skybox
-#include "Space.h"//space
-#include "Terrain.h"//terrain
-#include "DebugTexture.h"//debug texture
-
-//global buffer
-#include "GlobalObject.h"
-#include "GlobalTerrain.h"
-
-
 #include "Material.h"
-
 #include "Texture.h"
 #include "Sampler.h"
 #include "RenderShader.h"
@@ -57,11 +23,10 @@ public:
 	shared_ptr<CTexture> CreateTexture(string name, const TCHAR* pstrTextureNames, shared_ptr<CSampler> pSampler, UINT Slot = 0, UINT BindFlag = BIND_PS);
 	void CreateRenderShaders();
 	void CreateMeshs();
-	void CreateAnimater(string path, string animaterName);
+	//void CreateAnimater(string path, string animaterName);
 	void CreateBuffers();
 	void CreateGlobalBuffers();
 	void CreateMaterials();
-	void CreateAnimaters();
 
 	UINT CreateMultiMesh(string path, string name);
 	//.gjm file load
@@ -77,11 +42,10 @@ public:
 	void ReleaseRenderShaders();
 	void ReleaseMeshs();
 	void ReleaseMesh(string name);
-	void ReleaseAnimater(string name);
+	//void ReleaseAnimater(string name);
 	void ReleaseBuffers();
 	void ReleaseGlobalBuffers();
 	void ReleaseMaterials();
-	void ReleaseAnimaters();
 
 	shared_ptr<CTexture> GetTexture(string name) { return m_mTexture[name]; }
 	shared_ptr<CSampler> GetSampler(string name) { return m_mSampler[name]; }
@@ -90,7 +54,7 @@ public:
 	shared_ptr<CBuffer> GetBuffer(string name) { return m_mBuffer[name]; }
 	shared_ptr<CBuffer> GetGlobalBuffer(string name) { return m_mGlobalBuffer[name]; }
 	shared_ptr<CMaterial> GetMaterial(string name) { return m_mMaterial[name]; }
-	shared_ptr<CAnimater> GetAnimater(string name) { return m_mAnimater[name]; }
+	//shared_ptr<CAnimater> GetAnimater(string name) { return m_mAnimater[name]; }
 private:
 	//ID3D11Device* m_pd3dDevice{ nullptr };
 	//ID3D11DeviceContext* m_pd3dDeviceContext{ nullptr };
@@ -109,8 +73,8 @@ private:
 	map<string, shared_ptr<CSampler>> m_mSampler;
 	using pairSampler = pair<string, shared_ptr<CSampler>>;
 	//animater
-	map<string, shared_ptr<CAnimater>> m_mAnimater;
-	using pairAnimater = pair<string, shared_ptr<CAnimater>>;
+	//map<string, shared_ptr<CAnimater>> m_mAnimater;
+	//using pairAnimater = pair<string, shared_ptr<CAnimater>>;
 public:
 	CResourceManager();
 	virtual ~CResourceManager();

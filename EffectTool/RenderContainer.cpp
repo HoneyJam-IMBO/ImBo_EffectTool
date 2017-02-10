@@ -55,7 +55,7 @@ void CRenderContainer::UpdateShaderState(shared_ptr<CCamera> pCamera) {
 	
 	for (auto pObject : m_lpObjects) {
 		if (pObject->IsVisible(pCamera)) {
-			DEBUGER->RegistToDebugRenderContainer(pObject);
+//			DEBUGER->RegistToDebugRenderContainer(pObject);
 			pObject->RegistToDebuger();
 			pObject->SetBufferInfo(m_ppBufferData, nInstance, pCamera);
 			nInstance++;
@@ -87,7 +87,7 @@ void CRenderContainer::SetShaderState() {
 		p->SetShaderState();
 	}
 	//if (m_pGlobalBuffer) m_pGlobalBuffer->SetShaderState();
-	if (m_pAnimater)m_pAnimater->SetShaderState();
+//	if (m_pAnimater)m_pAnimater->SetShaderState();
 
 }
 
@@ -117,7 +117,7 @@ void CRenderContainer::CleanShaderState() {
 		p->CleanShaderState();
 	}
 
-	if (m_pAnimater)m_pAnimater->CleanShaderState();
+//	if (m_pAnimater)m_pAnimater->CleanShaderState();
 	//if (m_pGlobalBuffer) m_pGlobalBuffer->CleanShaderState();//global buffer
 }
 
@@ -234,7 +234,7 @@ void CRenderContainer::UpdateGlobalBuffer() {
 		m_ppGlobalBufferData[nBuffer++] = p->Map();
 	}
 	//set data
-	m_pGlobalObject->SetGlobalBufferInfo(m_ppGlobalBufferData);
+//	m_pGlobalObject->SetGlobalBufferInfo(m_ppGlobalBufferData);
 	//unmap
 	for (auto p : m_vpGlobalBuffer) {
 		p->Unmap();

@@ -165,30 +165,30 @@ void CRenderer::Render(shared_ptr<CCamera> pCamera) {
 		texture->CleanShaderState();
 	}
 	
-	if (INPUTMGR->GetDebugMode()) {
-		ID3D11Buffer* pGBufferUnpackingBuffer = pCamera->GetGBufferUnpackingBuffer();
-		GLOBALVALUEMGR->GetDeviceContext()->PSSetConstantBuffers(PS_UNPACKING_SLOT, 1, &pGBufferUnpackingBuffer);
+	//if (INPUTMGR->GetDebugMode()) {
+	//	ID3D11Buffer* pGBufferUnpackingBuffer = pCamera->GetGBufferUnpackingBuffer();
+	//	GLOBALVALUEMGR->GetDeviceContext()->PSSetConstantBuffers(PS_UNPACKING_SLOT, 1, &pGBufferUnpackingBuffer);
 
-		//if(testBotton){
-		DEBUGER->AddTexture(XMFLOAT2(100, 100), XMFLOAT2(250, 250), m_pd3dsrvColorSpecInt);
-		DEBUGER->AddTexture(XMFLOAT2(100, 250), XMFLOAT2(250, 400), m_pd3dsrvNormal);
-		DEBUGER->AddTexture(XMFLOAT2(100, 400), XMFLOAT2(250, 550), m_pd3dsrvLight);
-		DEBUGER->AddTexture(XMFLOAT2(250, 100), XMFLOAT2(500, 250), m_pd3dsrvAmbientOcculution);
-		//DEBUGER->AddTexture(XMFLOAT2(100, 100), XMFLOAT2(500, 500), m_pd3dsrvDepthStencil);
-		//DEBUGER->AddTexture(XMFLOAT2(0, 0), XMFLOAT2(1000, 1000), m_pd3dsrvAmbientOcculution);
+	//	//if(testBotton){
+	//	DEBUGER->AddTexture(XMFLOAT2(100, 100), XMFLOAT2(250, 250), m_pd3dsrvColorSpecInt);
+	//	DEBUGER->AddTexture(XMFLOAT2(100, 250), XMFLOAT2(250, 400), m_pd3dsrvNormal);
+	//	DEBUGER->AddTexture(XMFLOAT2(100, 400), XMFLOAT2(250, 550), m_pd3dsrvLight);
+	//	DEBUGER->AddTexture(XMFLOAT2(250, 100), XMFLOAT2(500, 250), m_pd3dsrvAmbientOcculution);
+	//	//DEBUGER->AddTexture(XMFLOAT2(100, 100), XMFLOAT2(500, 500), m_pd3dsrvDepthStencil);
+	//	//DEBUGER->AddTexture(XMFLOAT2(0, 0), XMFLOAT2(1000, 1000), m_pd3dsrvAmbientOcculution);
 
-		//이건 꼭 여기서 해줘야함.
+	//	//이건 꼭 여기서 해줘야함.
 
-		DEBUGER->RenderTexture();
-		DEBUGER->RenderText();
-		//DEBUGER->ClearDebuger();
-	}
-	else {
-		DEBUGER->ClearDebuger();
-	}
+	//	DEBUGER->RenderTexture();
+	//	DEBUGER->RenderText();
+	//	//DEBUGER->ClearDebuger();
+	//}
+	//else {
+	//	DEBUGER->ClearDebuger();
+	//}
 
-	//	//ui
-	TWBARMGR->Render();
+	////	//ui
+	//TWBARMGR->Render();
 
 	//present
 	m_pdxgiSwapChain->Present(0, 0);
@@ -205,9 +205,9 @@ void CRenderer::ObjectRender(shared_ptr<CCamera> pCamera) {
 	//object layer render
 	m_pObjectLayer->Render(pCamera);
 
-	//debuge
-	if (INPUTMGR->GetDebugMode())
-		DEBUGER->DebugRender(pCamera);
+	////debuge
+	//if (INPUTMGR->GetDebugMode())
+	//	DEBUGER->DebugRender(pCamera);
 
 }
 void CRenderer::LightRender(shared_ptr<CCamera> pCamera) {
@@ -222,14 +222,14 @@ void CRenderer::ClearDepthStencilView(ID3D11DepthStencilView* pDepthStencilView)
 	GLOBALVALUEMGR->GetDeviceContext()->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 void CRenderer::SetForwardRenderTargets() {
-	ID3D11RenderTargetView *pd3dRTVs[RENDER_TARGET_NUMBER] = { m_pd3drtvColorSpecInt, m_pd3drtvNormal, m_pd3drtvSpecPow };
+	ID3D11RenderTargetView *pd3dRTVs[3] = { m_pd3drtvColorSpecInt, m_pd3drtvNormal, m_pd3drtvSpecPow };
 	//float fClearColor[4] = { xmf4Xolor.x, xmf4Xolor.y, xmf4Xolor.z, xmf4Xolor.w };
 	float fClearColor[4] = { 0.f, 0.f, 0.f, 0.f };
 	if (m_pd3drtvColorSpecInt) GLOBALVALUEMGR->GetDeviceContext()->ClearRenderTargetView(m_pd3drtvColorSpecInt, fClearColor);
 	if (m_pd3drtvNormal) GLOBALVALUEMGR->GetDeviceContext()->ClearRenderTargetView(m_pd3drtvNormal, fClearColor);
 	if (m_pd3drtvSpecPow) GLOBALVALUEMGR->GetDeviceContext()->ClearRenderTargetView(m_pd3drtvSpecPow, fClearColor);
 
-	SetRenderTargetViews(RENDER_TARGET_NUMBER, pd3dRTVs, m_pd3ddsvDepthStencil);
+	SetRenderTargetViews(3, pd3dRTVs, m_pd3ddsvDepthStencil);
 }
 void CRenderer::SetMainRenderTargetView() {
 	GLOBALVALUEMGR->GetDeviceContext()->OMSetRenderTargets(1, &m_pd3dRenderTargetView, nullptr);
@@ -326,9 +326,9 @@ bool CRenderer::CreateSwapChain()
 	IDXGIFactory *pdxgiFactory = NULL;
 
 	UINT udxgiFlag = 0;
-#ifdef _DEBUG
-	udxgiFlag |= DXGI_CREATE_FACTORY_DEBUG;
-#endif
+//#ifdef _DEBUG
+//	udxgiFlag |= DXGI_CREATE_FACTORY_DEBUG;
+//#endif
 	//if (FAILED(hResult = CreateDXGIFactory3(udxgiFlag, __uuidof(IDXGIFactory3), (LPVOID*)&pdxgiFactory)))
 	if (FAILED(hResult = CreateDXGIFactory(/*udxgiFlag,*/ __uuidof(IDXGIFactory), (LPVOID*)&pdxgiFactory)))
 	{

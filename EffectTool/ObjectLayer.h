@@ -1,6 +1,6 @@
 #pragma once
 #include "Layer.h"
-#include "SkyBox.h"
+//#include "SkyBox.h"
 
 //class CRenderContainerSeller;
 

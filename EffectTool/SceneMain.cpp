@@ -1,45 +1,7 @@
 #include "stdafx.h"
 #include "SceneMain.h"
 
-void TW_CALL LoadFileCallback(void * clientData) {
-	LoadFileStruct* pLFS = reinterpret_cast<LoadFileStruct*>(clientData);
-//	string s = pLFS->Filename;
-//	string path{ "../inputdata/" };
 
-	pLFS->m_pScene->CreateControllObject(pLFS->Filename);
-	const char* barName{ "LoadFile" };
-	TWBARMGR->DeleteBar(barName);
-	//string s = pLFS;
-}
-void TW_CALL LoadFileButtonCallback(void * clientData) {
-	CSceneMain* pScene = reinterpret_cast<CSceneMain*>(clientData);
-	pScene->CreateLoadFileUI();
-}
-void TW_CALL AddInfoCallback(void * clientData) {
-	LoadFileStruct* pLFS = reinterpret_cast<LoadFileStruct*>(clientData);
-//	string s = pLFS->Filename;
-//	string path{ "../inputdata/" };
-
-	pLFS->m_pScene->AddFBXAnimationInfo(pLFS->Filename);
-	
-	const char* barName{ "AddInfo" };
-	TWBARMGR->DeleteBar(barName);
-	//string s = pLFS;
-}
-void TW_CALL AddInfoButtonCallback(void * clientData) {
-	CSceneMain* pScene = reinterpret_cast<CSceneMain*>(clientData);
-	pScene->CreateAddInfoUI();
-}
-void TW_CALL ClearAllButtonCallback(void * clientData) {
-	CSceneMain* pScene = reinterpret_cast<CSceneMain*>(clientData);
-	pScene->ClearAllFBXObject();
-}
-void TW_CALL WriteNowButtonCallback(void * clientData) {
-	CSceneMain* pScene = reinterpret_cast<CSceneMain*>(clientData);
-	EXPORTER->Begin(L"../outputdata/text.txt");
-	EXPORTER->ExportFbxObject(pScene->m_pFBXObject);
-	EXPORTER->End();
-}
 bool CSceneMain::Begin() {
 
 	//main button ui추가 
@@ -48,117 +10,117 @@ bool CSceneMain::Begin() {
 	//fbx animation 정보 추가 -> 기존 객체 mesh의 animater에 정보 추가
 	//
 	const char* barName{ "MainControll" };
-	TWBARMGR->AddBar(barName);
-	//set param
-	TWBARMGR->SetBarSize(barName, 500, 200);
-	TWBARMGR->SetBarPosition(barName, 250, 550);
-	TWBARMGR->SetBarColor(barName, 255, 0, 255);
-	TWBARMGR->SetBarContained(barName, true);
-	TWBARMGR->SetBarMovable(barName, false);
-	TWBARMGR->SetBarResizable(barName, false);
-	//set param
-	TWBARMGR->AddButtonCB(barName, "load", "load file button", LoadFileButtonCallback, this);
-	TWBARMGR->AddButtonCB(barName, "add", "add info button", AddInfoButtonCallback, this);
-	TWBARMGR->AddButtonCB(barName, "clear", "clear all button", ClearAllButtonCallback, this);
-	TWBARMGR->AddButtonCB(barName, "write", "write now button", WriteNowButtonCallback, this);
+	//TWBARMGR->AddBar(barName);
+	////set param
+	//TWBARMGR->SetBarSize(barName, 500, 200);
+	//TWBARMGR->SetBarPosition(barName, 250, 550);
+	//TWBARMGR->SetBarColor(barName, 255, 0, 255);
+	//TWBARMGR->SetBarContained(barName, true);
+	//TWBARMGR->SetBarMovable(barName, false);
+	//TWBARMGR->SetBarResizable(barName, false);
+	////set param
+	//TWBARMGR->AddButtonCB(barName, "load", "load file button", LoadFileButtonCallback, this);
+	//TWBARMGR->AddButtonCB(barName, "add", "add info button", AddInfoButtonCallback, this);
+	//TWBARMGR->AddButtonCB(barName, "clear", "clear all button", ClearAllButtonCallback, this);
+	//TWBARMGR->AddButtonCB(barName, "write", "write now button", WriteNowButtonCallback, this);
 
 	//m_pPlayer = new CPlayer;
 	//m_pPlayer->Begin();
 	//----------------------------------camera-------------------------------------
-	m_pCamera = m_pFrameWork->GetCamera();
+	//m_pCamera = m_pFrameWork->GetCamera();
 	//----------------------------------camera-------------------------------------
 
 	//--------------------------------------space-------------------------------------
 	//space
-	m_pSpaceContainer = new CSpaceContainer();
-	m_pSpaceContainer->Begin(static_cast<int>(SPACE_SIZE), static_cast<int>(SPACE_LEVEL));
-	//terrain
-	m_pTerrainContainer = new CTerrainContainer();
-	m_pTerrainContainer->Begin(L"../../Assets/HeightMap.raw", 257, 257, 0.5, m_pSpaceContainer);
-	//--------------------------------------space-------------------------------------
+	//m_pSpaceContainer = new CSpaceContainer();
+	//m_pSpaceContainer->Begin(static_cast<int>(SPACE_SIZE), static_cast<int>(SPACE_LEVEL));
+	////terrain
+	//m_pTerrainContainer = new CTerrainContainer();
+	//m_pTerrainContainer->Begin(L"../../Assets/HeightMap.raw", 257, 257, 0.5, m_pSpaceContainer);
+	////--------------------------------------space-------------------------------------
 
-	//--------------------------------객체 제작------------------------
-	int nMaxObjects = 1;
-	int space_size = static_cast<int>(SPACE_SIZE);
+	////--------------------------------객체 제작------------------------
+	//int nMaxObjects = 1;
+	//int space_size = static_cast<int>(SPACE_SIZE);
 
-	for (int i = 0; i < 100; ++i) {
-		CTestCube* pCube = new CTestCube();
-		pCube->Begin();
-		pCube->SetTerrainContainer(m_pTerrainContainer);
-		pCube->SetPosition(XMVectorSet(rand() % space_size, 100, rand() % space_size, 0.f));
-		m_pSpaceContainer->AddObject(pCube);
-	}
+	//for (int i = 0; i < 100; ++i) {
+	//	CTestCube* pCube = new CTestCube();
+	//	pCube->Begin();
+	//	pCube->SetTerrainContainer(m_pTerrainContainer);
+	//	pCube->SetPosition(XMVectorSet(rand() % space_size, 100, rand() % space_size, 0.f));
+	//	m_pSpaceContainer->AddObject(pCube);
+	//}
 
-	m_pRotationTestObject = new CTestCube();
-	m_pRotationTestObject->Begin();
-	m_pRotationTestObject->SetTerrainContainer(m_pTerrainContainer);
-	m_pRotationTestObject->SetPosition(XMLoadFloat3(&XMFLOAT3(0, 0, 0)));
-	m_pSpaceContainer->AddObject(m_pRotationTestObject);
+	//m_pRotationTestObject = new CTestCube();
+	//m_pRotationTestObject->Begin();
+	//m_pRotationTestObject->SetTerrainContainer(m_pTerrainContainer);
+	//m_pRotationTestObject->SetPosition(XMLoadFloat3(&XMFLOAT3(0, 0, 0)));
+	//m_pSpaceContainer->AddObject(m_pRotationTestObject);
 
-	//fbx mesh
-	//CTestObject* pObject = nullptr;
-	
-	//CBunny* pBunny = new CBunny();
-	//pBunny->Begin();
-	////pBunny->SetTerrainContainer(m_pTerrainContainer);
-	//pBunny->SetPosition(XMLoadFloat3(&XMFLOAT3(SPACE_SIZE / 2.f, 0, SPACE_SIZE / 2.f)));
-	//m_pSpaceContainer->AddObject(pBunny);
-	//fbx mesh
+	////fbx mesh
+	////CTestObject* pObject = nullptr;
+	//
+	////CBunny* pBunny = new CBunny();
+	////pBunny->Begin();
+	//////pBunny->SetTerrainContainer(m_pTerrainContainer);
+	////pBunny->SetPosition(XMLoadFloat3(&XMFLOAT3(SPACE_SIZE / 2.f, 0, SPACE_SIZE / 2.f)));
+	////m_pSpaceContainer->AddObject(pBunny);
+	////fbx mesh
 
-	CPointLight* pPointLight = nullptr;
-	int nPointLight = 10;
-	//int nPointLight = 0;
-	float fStartX = 0;
-	float fStartZ = 0;
-	pPointLight = new CPointLight;
-	pPointLight->Begin(POINT_LIGHT{ 100.f, XMFLOAT3(rand() % 5, rand() % 5, rand() % 5) });
-	pPointLight->SetTerrainContainer(m_pTerrainContainer);
-	pPointLight->SetPosition(XMVectorSet(0, 100, 0, 0.f));
-	m_pSpaceContainer->AddObject(pPointLight);
+	//CPointLight* pPointLight = nullptr;
+	//int nPointLight = 10;
+	////int nPointLight = 0;
+	//float fStartX = 0;
+	//float fStartZ = 0;
+	//pPointLight = new CPointLight;
+	//pPointLight->Begin(POINT_LIGHT{ 100.f, XMFLOAT3(rand() % 5, rand() % 5, rand() % 5) });
+	//pPointLight->SetTerrainContainer(m_pTerrainContainer);
+	//pPointLight->SetPosition(XMVectorSet(0, 100, 0, 0.f));
+	//m_pSpaceContainer->AddObject(pPointLight);
 
-	for (int i = 0; i < nPointLight; ++i) {
-			pPointLight = new CPointLight;
-			pPointLight->Begin(POINT_LIGHT{ 100.f, XMFLOAT3(rand() % 5, rand() % 5, rand() % 5) });
-			pPointLight->SetTerrainContainer(m_pTerrainContainer);
-	
-			pPointLight->SetPosition(XMVectorSet(rand() % space_size, 100, rand() % space_size, 0.f));
-			m_pSpaceContainer->AddObject(pPointLight);
-	}
-	
-	fStartX += 500;
-	fStartZ += 500;
-	CCapsuleLight* pCapsuleLight = nullptr;
-	int nCapsuleLight = 10;
-	
-	for (int i = 0; i < nCapsuleLight; ++i) {
-		pCapsuleLight = new CCapsuleLight;
-		pCapsuleLight->Begin(CAPSULE_LIGHT{ 100.f, XMFLOAT3(rand() % 5, rand() % 5, rand() % 5), 50.f});
-		pCapsuleLight->SetTerrainContainer(m_pTerrainContainer);
-	
-		pCapsuleLight->SetPosition(XMVectorSet(rand() % space_size, rand() % 50 + 100, rand() % space_size, 0.f));
-		m_pSpaceContainer->AddObject(pCapsuleLight);
-	}
-	
-	fStartX += 500;
-	fStartZ += 500;
-	
-	int nSpotLight = 10;
-	CSpotLight* pSpotLight = nullptr;
-	for (int i = 0; i < nSpotLight; ++i) {
-			pSpotLight = new CSpotLight;
-			pSpotLight->Begin(SPOT_LIGHT{ 100.f, XMFLOAT3(rand() % 100, rand() % 100, rand() % 100), 50.f, 50.f });
-			pSpotLight->SetTerrainContainer(m_pTerrainContainer);
-	
-			pSpotLight->SetPosition(XMVectorSet(rand() % space_size, rand()%50+100, rand() % space_size, 0.f));
-			m_pSpaceContainer->AddObject(pSpotLight);
-	}
+	//for (int i = 0; i < nPointLight; ++i) {
+	//		pPointLight = new CPointLight;
+	//		pPointLight->Begin(POINT_LIGHT{ 100.f, XMFLOAT3(rand() % 5, rand() % 5, rand() % 5) });
+	//		pPointLight->SetTerrainContainer(m_pTerrainContainer);
+	//
+	//		pPointLight->SetPosition(XMVectorSet(rand() % space_size, 100, rand() % space_size, 0.f));
+	//		m_pSpaceContainer->AddObject(pPointLight);
+	//}
+	//
+	//fStartX += 500;
+	//fStartZ += 500;
+	//CCapsuleLight* pCapsuleLight = nullptr;
+	//int nCapsuleLight = 10;
+	//
+	//for (int i = 0; i < nCapsuleLight; ++i) {
+	//	pCapsuleLight = new CCapsuleLight;
+	//	pCapsuleLight->Begin(CAPSULE_LIGHT{ 100.f, XMFLOAT3(rand() % 5, rand() % 5, rand() % 5), 50.f});
+	//	pCapsuleLight->SetTerrainContainer(m_pTerrainContainer);
+	//
+	//	pCapsuleLight->SetPosition(XMVectorSet(rand() % space_size, rand() % 50 + 100, rand() % space_size, 0.f));
+	//	m_pSpaceContainer->AddObject(pCapsuleLight);
+	//}
+	//
+	//fStartX += 500;
+	//fStartZ += 500;
+	//
+	//int nSpotLight = 10;
+	//CSpotLight* pSpotLight = nullptr;
+	//for (int i = 0; i < nSpotLight; ++i) {
+	//		pSpotLight = new CSpotLight;
+	//		pSpotLight->Begin(SPOT_LIGHT{ 100.f, XMFLOAT3(rand() % 100, rand() % 100, rand() % 100), 50.f, 50.f });
+	//		pSpotLight->SetTerrainContainer(m_pTerrainContainer);
+	//
+	//		pSpotLight->SetPosition(XMVectorSet(rand() % space_size, rand()%50+100, rand() % space_size, 0.f));
+	//		m_pSpaceContainer->AddObject(pSpotLight);
+	//}
 
-	//--------------------------전역 객체 제작-------------------------
-	//skybox
-	m_pSkyBox = new CSkyBox();
-	m_pSkyBox->Begin();
-	m_pSkyBox->SetCamera(m_pCamera);
-	//skybox
+	////--------------------------전역 객체 제작-------------------------
+	////skybox
+	//m_pSkyBox = new CSkyBox();
+	//m_pSkyBox->Begin();
+	//m_pSkyBox->SetCamera(m_pCamera);
+	////skybox
 
 	//directional light
 	m_pDirectionalLight = new CDirectionalLight;
@@ -191,21 +153,7 @@ bool CSceneMain::End() {
 	//m_RenderContainerSeller->End();
 	
 	//space
-	if (m_pSpaceContainer) {
-		m_pSpaceContainer->End();
-		delete m_pSpaceContainer;
-	}
-	//terrain
-	if (m_pTerrainContainer) {
-		m_pTerrainContainer->End();
-		delete m_pTerrainContainer;
-	}
-
-	//global object
-	if (m_pSkyBox) {
-		m_pSkyBox->End();
-		delete m_pSkyBox;
-	}
+	
 	if (m_pDirectionalLight) {
 		m_pDirectionalLight->End();
 		delete m_pDirectionalLight;
@@ -216,31 +164,15 @@ bool CSceneMain::End() {
 
 void CSceneMain::Animate(float fTimeElapsed) {
 	//drag & drop 처리문
-	const char* test{ nullptr };
-	test = INPUTMGR->GetDropFileName();
-	if (test) {
-		if (nullptr == m_pFBXObject) {//만약 없다면 
-			CreateControllObject("../../Assets/Model/fbx/1-2/Die_85.fbx");
-		}
-		else {
-			AddFBXAnimationInfo("../../Assets/Model/fbx/1-2/Die_85.fbx");
-			m_pFBXObject->PickingProc();
-		}
-	}
+	
 	//drag & drop 처리문
 	//-----------------------------------space------------------------------
-	m_pSpaceContainer->Animate(fTimeElapsed);
-	m_pSpaceContainer->PrepareRender(m_pCamera);
+	//m_pSpaceContainer->Animate(fTimeElapsed);
+	//m_pSpaceContainer->PrepareRender(m_pCamera);
 	//-----------------------------------space------------------------------
 
 	//--------------------------전역 객체 animate / regist-------------------------
 	m_pDirectionalLight->SetColor(xmf4DirectionalLightColor.x, xmf4DirectionalLightColor.y, xmf4DirectionalLightColor.z);
-	
-	//skybox camera 동기화
-	m_pSkyBox->Animate(fTimeElapsed);
-	//sky box 등록
-	m_pSkyBox->RegistToContainer();
-	//directional light 등록
 	m_pDirectionalLight->RegistToContainer();
 	//--------------------------전역 객체 animate / regist-------------------------
 }
@@ -324,7 +256,7 @@ CGameObject* CSceneMain::PickObjectPointedByCursor(int xClient, int yClient)
 	XMVECTOR xmvRayDir = xmvPickPosition - m_pCamera->GetPosition();
 	
 	CGameObject* pNearestObject = NULL;
-	float fHitDistance = FLT_MAX;
+	/*float fHitDistance = FLT_MAX;
 	float fNearDistance = FLT_MAX;
 	pNearestObject = m_pSpaceContainer->PickObject(m_pCamera->GetPosition(), XMVector3Normalize(xmvRayDir), fHitDistance);
 	fNearDistance = fHitDistance;
@@ -332,173 +264,173 @@ CGameObject* CSceneMain::PickObjectPointedByCursor(int xClient, int yClient)
 		if (fNearDistance > fHitDistance) {
 			pNearestObject = m_pDirectionalLight;
 		}
-	}
+	}*/
 	return(pNearestObject);
 }
 
 void CSceneMain::CreateControllObject(string path){
 //resource 제작	
-	m_MeshCnt = RESOURCEMGR->CreateMultiMesh(path, "Test");
-	//m_MeshCnt = RESOURCEMGR->CreateMultiMesh("../outputata/text.txt", "Test");
-	RCSELLER->GetRenderContainer(object_id::OBJECT_FBX_ELF)->ClearMesh();
-	char pName[20];
-	for (int i = 0; i < m_MeshCnt; ++i) {
-		sprintf(pName, "%s%d", "Test", i);
-		RCSELLER->GetRenderContainer(object_id::OBJECT_FBX_ELF)->AddMesh(RESOURCEMGR->GetMesh(pName));
-	}
-	RCSELLER->GetRenderContainer(object_id::OBJECT_FBX_ELF)->SetAnimater(RESOURCEMGR->GetAnimater("Test"));
-//resource 제작	
-
+//	m_MeshCnt = RESOURCEMGR->CreateMultiMesh(path, "Test");
+//	//m_MeshCnt = RESOURCEMGR->CreateMultiMesh("../outputata/text.txt", "Test");
+//	RCSELLER->GetRenderContainer(object_id::OBJECT_FBX_ELF)->ClearMesh();
+//	char pName[20];
+//	for (int i = 0; i < m_MeshCnt; ++i) {
+//		sprintf(pName, "%s%d", "Test", i);
+//		RCSELLER->GetRenderContainer(object_id::OBJECT_FBX_ELF)->AddMesh(RESOURCEMGR->GetMesh(pName));
+//	}
+//	RCSELLER->GetRenderContainer(object_id::OBJECT_FBX_ELF)->SetAnimater(RESOURCEMGR->GetAnimater("Test"));
+////resource 제작	
+//
 
 //객체 제작
-	m_pFBXObject = new CTestObject();
-	m_pFBXObject->Begin();
+	//m_pFBXObject = new CTestObject();
+	//m_pFBXObject->Begin();
 	//pObject->SetTerrainContainer(m_pTerrainContainer);
-	m_pFBXObject->SetPosition(XMLoadFloat3(&XMFLOAT3(SPACE_SIZE / 2.f, 0, SPACE_SIZE / 2.f)));
-	m_pSpaceContainer->AddObject(m_pFBXObject);
+	//m_pFBXObject->SetPosition(XMLoadFloat3(&XMFLOAT3(SPACE_SIZE / 2.f, 0, SPACE_SIZE / 2.f)));
+	//m_pSpaceContainer->AddObject(m_pFBXObject);
 //객체 제작
 	//ui pop up!
-	m_pFBXObject->PickingProc();
+	//m_pFBXObject->PickingProc();
 }
 
 void CSceneMain::CreateLoadFileUI(){
 
-	const char* barName{ "LoadFile" };
-	TWBARMGR->AddBar(barName);
+	//const char* barName{ "LoadFile" };
+	//TWBARMGR->AddBar(barName);
 
-	vector<wstring> vFile;
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".fbx");
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".FBX");
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".gjm");
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".GJM");
-	DIRECTORYFINDER->GetFiles(vFile, L"../outputdata", true, true, L".gjm");
-	DIRECTORYFINDER->GetFiles(vFile, L"../outputdata", true, true, L".GJM");
-	//test
-	DIRECTORYFINDER->GetFiles(vFile, L"../outputdata", true, true, L".txt");
+	//vector<wstring> vFile;
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".fbx");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".FBX");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".gjm");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".GJM");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../outputdata", true, true, L".gjm");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../outputdata", true, true, L".GJM");
+	////test
+	//DIRECTORYFINDER->GetFiles(vFile, L"../outputdata", true, true, L".txt");
 
-	//const char* groupName = "File";
-	char menuName[64];
-	int cnt{ 0 };
-	m_LoadFileStruct.resize(vFile.size());
-	for (auto data : vFile) {
-		//file directory store;
-		data = DIRECTORYFINDER->ReplaceString(data, L"\\", L"/");
-		string filsDirectory{ "" };
-		filsDirectory.assign(data.cbegin(), data.cend());
-		m_LoadFileStruct[cnt] = LoadFileStruct{ this, filsDirectory };
+	////const char* groupName = "File";
+	//char menuName[64];
+	//int cnt{ 0 };
+	//m_LoadFileStruct.resize(vFile.size());
+	//for (auto data : vFile) {
+	//	//file directory store;
+	//	data = DIRECTORYFINDER->ReplaceString(data, L"\\", L"/");
+	//	string filsDirectory{ "" };
+	//	filsDirectory.assign(data.cbegin(), data.cend());
+	//	m_LoadFileStruct[cnt] = LoadFileStruct{ this, filsDirectory };
 
-		//menu name = file name
-		string menuNameString{ "" };
-		menuNameString.assign(data.cbegin(), data.cend());
-		sprintf(menuName, "%s", menuNameString.c_str());
+	//	//menu name = file name
+	//	string menuNameString{ "" };
+	//	menuNameString.assign(data.cbegin(), data.cend());
+	//	sprintf(menuName, "%s", menuNameString.c_str());
 
-		//group name = directory name
-		data = DIRECTORYFINDER->ReplaceString(data, L"/", L"\\");
-		LPWSTR str = (LPWSTR)data.c_str();
-		PathRemoveFileSpec(str);
-	
-		wstring wGroupName{ str };
-		string groupName;
-		groupName.assign(wGroupName.cbegin(), wGroupName.cend());
-		TWBARMGR->AddButtonCB(barName, groupName.c_str() , menuName, LoadFileCallback, &m_LoadFileStruct[cnt]);
-		cnt++;
-	}
+	//	//group name = directory name
+	//	data = DIRECTORYFINDER->ReplaceString(data, L"/", L"\\");
+	//	LPWSTR str = (LPWSTR)data.c_str();
+	//	PathRemoveFileSpec(str);
+	//
+	//	wstring wGroupName{ str };
+	//	string groupName;
+	//	groupName.assign(wGroupName.cbegin(), wGroupName.cend());
+	//	TWBARMGR->AddButtonCB(barName, groupName.c_str() , menuName, LoadFileCallback, &m_LoadFileStruct[cnt]);
+	//	cnt++;
+	//}
 	//make texture/ set texture
 	//pObj->GetRenderContainer()->GetMesh(pObj->GetSelectMeshIndex());
 }
 
 void CSceneMain::AddFBXAnimationInfo(string path){
-	if (nullptr == m_pFBXObject) {
-		//wstring ws{ L"" };
-		//ws.assign(path.cbegin(), path.cend());
-		CreateControllObject(path);
-		return;
-	}
+	//if (nullptr == m_pFBXObject) {
+	//	//wstring ws{ L"" };
+	//	//ws.assign(path.cbegin(), path.cend());
+	//	CreateControllObject(path);
+	//	return;
+	//}
 
-	//fbx animation info 추가!
-	string name{ "Test" };
-	FBXIMPORTER->Begin(path);
-	if (FBXIMPORTER->GetHasAnimation()) {
-		CAnimationInfo* pAnimationInfo = CAnimationInfo::CreateAnimationInfoFromFBXFile(RESOURCEMGR->GetAnimater(name));
-	}
-	FBXIMPORTER->End();
-	//fbx animation info 추가!
+	////fbx animation info 추가!
+	//string name{ "Test" };
+	//FBXIMPORTER->Begin(path);
+	//if (FBXIMPORTER->GetHasAnimation()) {
+	//	CAnimationInfo* pAnimationInfo = CAnimationInfo::CreateAnimationInfoFromFBXFile(RESOURCEMGR->GetAnimater(name));
+	//}
+	//FBXIMPORTER->End();
+	////fbx animation info 추가!
 
-	m_pFBXObject->PickingProc();
+	//m_pFBXObject->PickingProc();
 }
 
 void CSceneMain::CreateAddInfoUI(){
-	const char* barName{ "AddInfo" };
-	TWBARMGR->AddBar(barName);
+	//const char* barName{ "AddInfo" };
+	//TWBARMGR->AddBar(barName);
 
-	if (m_LoadFileStruct.empty()) {
-		vector<wstring> vFile;
-		DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, false, L".fbx");
-		DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, false, L".FBX");
+	//if (m_LoadFileStruct.empty()) {
+	//	vector<wstring> vFile;
+	//	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, false, L".fbx");
+	//	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, false, L".FBX");
 
-		const char* groupName = "File";
-		char menuName[64];
-		int cnt{ 0 };
-		m_LoadFileStruct.resize(vFile.size());
-		for (auto data : vFile) {
-			string s{ "" };
-			s.assign(data.cbegin(), data.cend());
-			m_LoadFileStruct[cnt] = LoadFileStruct{ this, s };
-			sprintf(menuName, "%s", s.c_str());
-			TWBARMGR->AddButtonCB(barName, groupName, menuName, AddInfoCallback, &m_LoadFileStruct[cnt]);
-			cnt++;
-		}
-	}
-	else {
-		const char* groupName = "File";
-		char menuName[64];
-		int cnt{ 0 };
-		for (auto data : m_LoadFileStruct) {
-			sprintf(menuName, "%s", m_LoadFileStruct[cnt].Filename.c_str());
-			TWBARMGR->AddButtonCB(barName, groupName, menuName, AddInfoCallback, &m_LoadFileStruct[cnt]);
-			cnt++;
-		}
-	}
+	//	const char* groupName = "File";
+	//	char menuName[64];
+	//	int cnt{ 0 };
+	//	m_LoadFileStruct.resize(vFile.size());
+	//	for (auto data : vFile) {
+	//		string s{ "" };
+	//		s.assign(data.cbegin(), data.cend());
+	//		m_LoadFileStruct[cnt] = LoadFileStruct{ this, s };
+	//		sprintf(menuName, "%s", s.c_str());
+	//		TWBARMGR->AddButtonCB(barName, groupName, menuName, AddInfoCallback, &m_LoadFileStruct[cnt]);
+	//		cnt++;
+	//	}
+	//}
+	//else {
+	//	const char* groupName = "File";
+	//	char menuName[64];
+	//	int cnt{ 0 };
+	//	for (auto data : m_LoadFileStruct) {
+	//		sprintf(menuName, "%s", m_LoadFileStruct[cnt].Filename.c_str());
+	//		TWBARMGR->AddButtonCB(barName, groupName, menuName, AddInfoCallback, &m_LoadFileStruct[cnt]);
+	//		cnt++;
+	//	}
+	//}
 }
 
 void CSceneMain::ClearAllFBXObject(){
-	if (m_pFBXObject) {
-		m_pSpaceContainer->RevomeObject(m_pFBXObject);
-		m_pFBXObject->GetRenderContainer()->ClearMesh();
-		m_pFBXObject->GetRenderContainer()->ClearAnimater();
-		m_pFBXObject->End();
-		delete m_pFBXObject;
-		m_pFBXObject = nullptr;
+	//if (m_pFBXObject) {
+	//	m_pSpaceContainer->RevomeObject(m_pFBXObject);
+	//	m_pFBXObject->GetRenderContainer()->ClearMesh();
+	//	m_pFBXObject->GetRenderContainer()->ClearAnimater();
+	//	m_pFBXObject->End();
+	//	delete m_pFBXObject;
+	//	m_pFBXObject = nullptr;
 
-		//pObject->SetTerrainContainer(m_pTerrainContainer);
-		char MeshName[64];
-		const char* name = "Test";
-		for (int i = 0; i < m_MeshCnt; ++i) {
-			sprintf(MeshName, "%s%d", name, i);
-			RESOURCEMGR->ReleaseMesh(MeshName);
-		}
-		RESOURCEMGR->ReleaseAnimater(name);
-		m_MeshCnt = 0;
+	//	//pObject->SetTerrainContainer(m_pTerrainContainer);
+	//	char MeshName[64];
+	//	const char* name = "Test";
+	//	for (int i = 0; i < m_MeshCnt; ++i) {
+	//		sprintf(MeshName, "%s%d", name, i);
+	//		RESOURCEMGR->ReleaseMesh(MeshName);
+	//	}
+	//	RESOURCEMGR->ReleaseAnimater(name);
+	//	m_MeshCnt = 0;
 
-	}
-	ClearAllFBXUI();
+	//}
+	//ClearAllFBXUI();
 }
 
 void CSceneMain::ClearAllFBXUI(){
-	TWBARMGR->DeleteBar("AnimaterInfo");
-	TWBARMGR->DeleteBar("AddInfo");
-	TWBARMGR->DeleteBar("LoadFile");
+	//TWBARMGR->DeleteBar("AnimaterInfo");
+	//TWBARMGR->DeleteBar("AddInfo");
+	//TWBARMGR->DeleteBar("LoadFile");
 
-	TWBARMGR->DeleteBar("AnimationInfo");
-	TWBARMGR->DeleteBar("ActiveJoint");
+	//TWBARMGR->DeleteBar("AnimationInfo");
+	//TWBARMGR->DeleteBar("ActiveJoint");
 
-	TWBARMGR->DeleteBar("MeshInfo");
-	TWBARMGR->DeleteBar("PickingBar");
-	TWBARMGR->DeleteBar("LoadTextureFile");
+	//TWBARMGR->DeleteBar("MeshInfo");
+	//TWBARMGR->DeleteBar("PickingBar");
+	//TWBARMGR->DeleteBar("LoadTextureFile");
 }
 
-CSceneMain::CSceneMain(CDirectXFramework* pFrameWork) : CScene("Main") {
-	m_pFrameWork = pFrameWork;
+CSceneMain::CSceneMain(CCamera* pCamera) : CScene("Main") {
+	m_pCamera = pCamera;
 }
 CSceneMain::~CSceneMain() {
 

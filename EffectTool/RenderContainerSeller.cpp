@@ -184,7 +184,7 @@ CRenderContainer* CRenderContainerSeller::GetRenderContainer(object_id objectid)
 		m_mRenderContainer[objectid]->AddBuffer(RESOURCEMGR->GetBuffer("FBX"));
 		m_mRenderContainer[objectid]->AddTexture(RESOURCEMGR->GetTexture("FBX"));
 		m_mRenderContainer[objectid]->AddMaterial(RESOURCEMGR->GetMaterial("BUNNY"));
-		m_mRenderContainer[objectid]->SetAnimater(RESOURCEMGR->GetAnimater("BUNNY"));
+//		m_mRenderContainer[objectid]->SetAnimater(RESOURCEMGR->GetAnimater("BUNNY"));
 
 		m_mRenderContainer[objectid]->Begin();
 		break;

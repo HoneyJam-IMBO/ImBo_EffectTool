@@ -14,9 +14,7 @@ private:
 	
 
 protected:
-	
-	CSingleTonBase(string name) : CObject(name){}
-
+	CSingleTonBase(string name) : CMyObject(name){}
 	~CSingleTonBase(){};
 
 

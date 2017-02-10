@@ -194,16 +194,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\0208 buffer 정리\DXMain\Layer.h" />
-    <ClInclude Include="..\..\0208 buffer 정리\DXMain\RenderShader.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComputeShader.h" />
     <ClInclude Include="CSBloom.h" />
     <ClInclude Include="CSHorizontalBlur.h" />
+    <ClInclude Include="CSVerticalBlur.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="DirectionalLightMesh.h" />
     <ClInclude Include="DownScaleFirstPass.h" />
     <ClInclude Include="DownScaleSecondPass.h" />
     <ClInclude Include="DXObject.h" />
@@ -214,10 +214,13 @@
     <ClInclude Include="GlobalValueManager.h" />
     <ClInclude Include="GraphicDev.h" />
     <ClInclude Include="IncludeHeader.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Layer.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightLayer.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="MyFormView.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectLayer.h" />
@@ -225,6 +228,7 @@
     <ClInclude Include="RenderContainer.h" />
     <ClInclude Include="RenderContainerSeller.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderShader.h" />
     <ClInclude Include="RenderThread.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -239,8 +243,6 @@
     <ClInclude Include="TimeMgr.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\0208 buffer 정리\DXMain\Layer.cpp" />
-    <ClCompile Include="..\..\0208 buffer 정리\DXMain\RenderShader.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -249,6 +251,7 @@
     <ClCompile Include="CSHorizontalBlur.cpp" />
     <ClCompile Include="CSVerticalBlur.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="DirectionalLightMesh.cpp" />
     <ClCompile Include="DownScaleFirstPass.cpp" />
     <ClCompile Include="DownScaleSecondPass.cpp" />
     <ClCompile Include="DXObject.cpp" />
@@ -258,10 +261,13 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GlobalValueManager.cpp" />
     <ClCompile Include="GraphicDev.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightLayer.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MyFormView.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectLayer.cpp" />
@@ -269,6 +275,7 @@
     <ClCompile Include="RenderContainer.cpp" />
     <ClCompile Include="RenderContainerSeller.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderShader.cpp" />
     <ClCompile Include="RenderThread.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sampler.cpp" />
@@ -295,10 +302,29 @@
     <Image Include="UserImages.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CalcDirectionalLight.hlsli" />
     <None Include="res\EffectTool.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="CSBloom.hlsl" />
+    <FxCompile Include="CSDownScaleFirstPass.hlsl" />
+    <FxCompile Include="CSDownScaleSecondPass.hlsl" />
+    <FxCompile Include="CSHorizontalBlur.hlsl" />
     <FxCompile Include="CSVerticalBlur.hlsl" />
+    <FxCompile Include="PixelShader.hlsl" />
+    <FxCompile Include="PSAnimationObject.hlsl" />
+    <FxCompile Include="PSDefault.hlsl" />
+    <FxCompile Include="PSDirectionalLight.hlsl" />
+    <FxCompile Include="PSInstancing.hlsl" />
+    <FxCompile Include="PSPostProcessing.hlsl" />
+    <FxCompile Include="PSTestDeferred.hlsl" />
+    <FxCompile Include="VertexShader.hlsl" />
+    <FxCompile Include="VSAnimationObject.hlsl" />
+    <FxCompile Include="VSDefault.hlsl" />
+    <FxCompile Include="VSDirectionalLight.hlsl" />
+    <FxCompile Include="VSInctancing.hlsl" />
+    <FxCompile Include="VSPostProcessing.hlsl" />
+    <FxCompile Include="VSTestDeferred.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

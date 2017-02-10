@@ -110,8 +110,7 @@ bool CGlobalValueManager::Begin(HINSTANCE hInst, HWND hWnd) {
 		// 별도로 지정하지 않은 경우 모든 응용 프로그램은 9.1을 지원하는 것으로 간주됩니다.
 		D3D_FEATURE_LEVEL d3dFeatureLevels[]
 		{
-			D3D_FEATURE_LEVEL_11_1
-			, D3D_FEATURE_LEVEL_11_0
+			D3D_FEATURE_LEVEL_11_0
 			, D3D_FEATURE_LEVEL_10_1
 			, D3D_FEATURE_LEVEL_10_0
 		};
@@ -119,7 +118,7 @@ bool CGlobalValueManager::Begin(HINSTANCE hInst, HWND hWnd) {
 		auto szFeatureLevel = static_cast<UINT>(GetArraySize(d3dFeatureLevels));
 
 		// 최종적으로 사용될 장치의 기능 수준을 저장하기 위한 변수입니다.
-		D3D_FEATURE_LEVEL nd3dFeatureLevel = D3D_FEATURE_LEVEL_11_1;
+		D3D_FEATURE_LEVEL nd3dFeatureLevel = D3D_FEATURE_LEVEL_11_0;
 
 		// Result Handle 입니다. 장치가 성공적으로 생성도는지 검사합니다.
 		HRESULT hResult = S_OK;
@@ -191,9 +190,9 @@ bool CGlobalValueManager::Begin(HINSTANCE hInst, HWND hWnd) {
 		IDXGIFactory *pdxgiFactory = NULL;
 
 		UINT udxgiFlag = 0;
-#ifdef _DEBUG
-		udxgiFlag |= DXGI_CREATE_FACTORY_DEBUG;
-#endif
+//#ifdef _DEBUG
+//		udxgiFlag |= DXGI_CREATE_FACTORY_DEBUG;
+//#endif
 		//if (FAILED(hResult = CreateDXGIFactory3(udxgiFlag, __uuidof(IDXGIFactory3), (LPVOID*)&pdxgiFactory)))
 		if (FAILED(hResult = CreateDXGIFactory(/*udxgiFlag,*/ __uuidof(IDXGIFactory), (LPVOID*)&pdxgiFactory)))
 		{

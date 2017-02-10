@@ -3,8 +3,7 @@
 #include "GameObject.h"
 
 //dxobject
-#include "GlobalObject.h"
-#include "Mesh.h"
+
 #include "RenderShader.h"
 #include "Texture.h"
 #include "Buffer.h"
@@ -51,7 +50,7 @@ public:
 	void AddMaterial(shared_ptr<CMaterial> pMaterial);
 	//global buffer
 	void AddGlobalBuffer(shared_ptr<CBuffer> pGlobalBuffer);
-	void SetGlobalObject(CGlobalObject* pGlobalObject) { m_pGlobalObject = pGlobalObject; }
+//	void SetGlobalObject(CGlobalObject* pGlobalObject) { m_pGlobalObject = pGlobalObject; }
 	//global buffer
 	//animater!
 	void SetAnimater(shared_ptr<CAnimater> pAnimater) { m_pAnimater = pAnimater; }
@@ -83,7 +82,7 @@ protected:
 	//global buffer
 	vector<shared_ptr<CBuffer>> m_vpGlobalBuffer;
 	int m_nGlobalBuffer{ 0 };
-	CGlobalObject* m_pGlobalObject{ nullptr };
+//	CGlobalObject* m_pGlobalObject{ nullptr };
 	//global buffer
 	vector<shared_ptr<CMaterial>> m_vpMaterial;
 	int m_nMaterial{ 0 };

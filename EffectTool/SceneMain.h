@@ -1,26 +1,26 @@
 #pragma once
 
-#include "DirectXFramework.h"
+//#include "DirectXFramework.h"
 #include "Scene.h"
 
 //seller
 #include "RenderContainerSeller.h"
 
 //object
-#include "FreeCamera.h"
-#include "ThirdPersonCamera.h"
-#include "Bunny.h"
-#include "TestCube.h"
-//player
-#include "Player.h"
-//space
-#include "SpaceContainer.h"
-//terrain
-#include "TerrainContainer.h"
-//light
-#include "PointLight.h"
-#include "SpotLight.h"
-#include "CapsuleLight.h"
+//#include "FreeCamera.h"
+//#include "ThirdPersonCamera.h"
+//#include "Bunny.h"
+//#include "TestCube.h"
+////player
+//#include "Player.h"
+////space
+//#include "SpaceContainer.h"
+////terrain
+//#include "TerrainContainer.h"
+////light
+//#include "PointLight.h"
+//#include "SpotLight.h"
+//#include "CapsuleLight.h"
 #include "DirectionalLight.h"
 
 static XMFLOAT4 xmf4DirectionalLightColor;
@@ -58,31 +58,31 @@ public:
 	//변수
 	vector<LoadFileStruct> m_LoadFileStruct;
 	//fbx object
-	CTestObject* m_pFBXObject{ nullptr };
+	//CTestObject* m_pFBXObject{ nullptr };
 private:
 	int m_MeshCnt{ 0 };
 	//framework
-	CDirectXFramework* m_pFrameWork{ nullptr };
+	//CDirectXFramework* m_pFrameWork{ nullptr };
 
 	//진짜 카메라는 framework에 있다.
-	shared_ptr<CCamera> m_pCamera{ nullptr };
+	CCamera* m_pCamera{ nullptr };
 
 	//global object
-	CSkyBox* m_pSkyBox{ nullptr };
+	//CSkyBox* m_pSkyBox{ nullptr };
 	CDirectionalLight* m_pDirectionalLight{ nullptr };
 	//global object
 
 	//container seller
 	//CRenderContainerSeller* m_RenderContainerSeller{ nullptr };
 	//container seller
-	CTestCube* m_pRotationTestObject{ nullptr };
+	//CTestCube* m_pRotationTestObject{ nullptr };
 	
 	//space
-	CSpaceContainer* m_pSpaceContainer{ nullptr };
+	//CSpaceContainer* m_pSpaceContainer{ nullptr };
 	//space
 	
 	//terrain
-	CTerrainContainer* m_pTerrainContainer{ nullptr };
+	//CTerrainContainer* m_pTerrainContainer{ nullptr };
 	//terrain
 	
 	//player
@@ -92,7 +92,7 @@ private:
 	//picking
 	CGameObject* m_pPickingObject{ nullptr };
 public:
-	CSceneMain(CDirectXFramework* pFrameWork);
+	CSceneMain(CCamera* pCamera);
 	~CSceneMain();
 
 };

@@ -3,76 +3,76 @@
 
 #include "RenderContainer.h"
 #include "RenderContainerSeller.h"
-#include "FileBasedMesh.h"
-#include "TerrainContainer.h"
+//#include "FileBasedMesh.h"
+//#include "TerrainContainer.h"
 #include "Layer.h"
-#include "Animater.h"
+//#include "Animater.h"
 
 //SetSelectMeshCallback
-void TW_CALL SetSelectMeshCallback(const void * value, void * clientData) {
-	if (nullptr == clientData) return;
-	CGameObject* pObj = reinterpret_cast<CGameObject*>(clientData);
-	float index = *static_cast<const float*>(value);
-	pObj->SetSelectMeshIndex(index);
-	pObj->CreateMenuMeshTextureUI();
-	for (int i = 0; i < pObj->GetRenderContainer()->GetvMesh().size(); ++i) {
-		if (i == pObj->GetSelectMeshIndex()) {
-			pObj->GetRenderContainer()->GetMesh(i)->SetMeshMaterial(RESOURCEMGR->GetMaterial("RED"));
-			continue;
-		}
-		pObj->GetRenderContainer()->GetMesh(i)->SetMeshMaterial(RESOURCEMGR->GetMaterial("DEFAULT"));
-	}
-}
-void TW_CALL GetSelectMeshCallback(void * value, void * clientData) {
-	if (nullptr == clientData) return;
-	CGameObject* pObj = reinterpret_cast<CGameObject*>(clientData);
-	*static_cast<float *>(value) = pObj->GetSelectMeshIndex();
-	float x = *static_cast<float *>(value);
-}
-
-void TW_CALL SetMeshTextureButtonCallback(void * clientData) {
-	CGameObject* pObj = reinterpret_cast<CGameObject*>(clientData);
-	pObj->CreateMenuMeshTextureUI();
-
-	//make texture/ set texture
-	//pObj->GetRenderContainer()->GetMesh(pObj->GetSelectMeshIndex());
-}
-void TW_CALL LoadTextureFileCallback(void* clientData) {
-	/*
-	pSampler = make_shared<CSampler>(m_pd3dDevice, m_pd3dDeviceContext);
-	pSampler->Begin(PS_TEXTURE_SAMPLER, BIND_PS);
-	m_mSampler.insert(pairSampler("DEFAULT", pSampler));
-	UINT DefaultSlot = { PS_TEXTURE };
-	UINT DefaultFlag = { BIND_PS };
-	D3DX11CreateShaderResourceViewFromFile(m_pd3dDevice, _T("../../Assets/default.jpg"), NULL, NULL, &pd3dSRV, NULL);
-	pTexture = make_shared<CTexture>(m_pd3dDevice, m_pd3dDeviceContext);
-	pTexture->Begin(pd3dSRV, pSampler, DefaultSlot, DefaultFlag);
-	m_mTexture.insert(pairTexture("DEFAULT", pTexture));
-	*/
-	StructLoadTextureFile* pData = reinterpret_cast<StructLoadTextureFile*>(clientData);
-	//string path = "../inputdata/";
-	//path += pData->m_sName;
-	wstring wPath{ L"" };
-	wPath.assign(pData->m_sName.cbegin(), pData->m_sName.cend());
-
-	char name[64];
-	sprintf(name, "Test%d", dynamic_cast<CFileBasedMesh*>(pData->m_pMesh.get())->GetMeshIndex());
-	pData->m_pMesh->SetMeshTexture(0, RESOURCEMGR->CreateTexture(name, wPath.c_str(), RESOURCEMGR->GetSampler("DEFAULT")));
-
-	pData->m_pMesh->SetMeshMaterial(RESOURCEMGR->GetMaterial("DEFAULT"));
-}
+//void TW_CALL SetSelectMeshCallback(const void * value, void * clientData) {
+//	if (nullptr == clientData) return;
+//	CGameObject* pObj = reinterpret_cast<CGameObject*>(clientData);
+//	float index = *static_cast<const float*>(value);
+//	pObj->SetSelectMeshIndex(index);
+//	pObj->CreateMenuMeshTextureUI();
+//	for (int i = 0; i < pObj->GetRenderContainer()->GetvMesh().size(); ++i) {
+//		if (i == pObj->GetSelectMeshIndex()) {
+//			pObj->GetRenderContainer()->GetMesh(i)->SetMeshMaterial(RESOURCEMGR->GetMaterial("RED"));
+//			continue;
+//		}
+//		pObj->GetRenderContainer()->GetMesh(i)->SetMeshMaterial(RESOURCEMGR->GetMaterial("DEFAULT"));
+//	}
+//}
+//void TW_CALL GetSelectMeshCallback(void * value, void * clientData) {
+//	if (nullptr == clientData) return;
+//	CGameObject* pObj = reinterpret_cast<CGameObject*>(clientData);
+//	*static_cast<float *>(value) = pObj->GetSelectMeshIndex();
+//	float x = *static_cast<float *>(value);
+//}
+//
+//void TW_CALL SetMeshTextureButtonCallback(void * clientData) {
+//	CGameObject* pObj = reinterpret_cast<CGameObject*>(clientData);
+//	pObj->CreateMenuMeshTextureUI();
+//
+//	//make texture/ set texture
+//	//pObj->GetRenderContainer()->GetMesh(pObj->GetSelectMeshIndex());
+//}
+//void TW_CALL LoadTextureFileCallback(void* clientData) {
+//	/*
+//	pSampler = make_shared<CSampler>(m_pd3dDevice, m_pd3dDeviceContext);
+//	pSampler->Begin(PS_TEXTURE_SAMPLER, BIND_PS);
+//	m_mSampler.insert(pairSampler("DEFAULT", pSampler));
+//	UINT DefaultSlot = { PS_TEXTURE };
+//	UINT DefaultFlag = { BIND_PS };
+//	D3DX11CreateShaderResourceViewFromFile(m_pd3dDevice, _T("../../Assets/default.jpg"), NULL, NULL, &pd3dSRV, NULL);
+//	pTexture = make_shared<CTexture>(m_pd3dDevice, m_pd3dDeviceContext);
+//	pTexture->Begin(pd3dSRV, pSampler, DefaultSlot, DefaultFlag);
+//	m_mTexture.insert(pairTexture("DEFAULT", pTexture));
+//	*/
+//	StructLoadTextureFile* pData = reinterpret_cast<StructLoadTextureFile*>(clientData);
+//	//string path = "../inputdata/";
+//	//path += pData->m_sName;
+//	wstring wPath{ L"" };
+//	wPath.assign(pData->m_sName.cbegin(), pData->m_sName.cend());
+//
+//	char name[64];
+//	sprintf(name, "Test%d", dynamic_cast<CFileBasedMesh*>(pData->m_pMesh.get())->GetMeshIndex());
+//	pData->m_pMesh->SetMeshTexture(0, RESOURCEMGR->CreateTexture(name, wPath.c_str(), RESOURCEMGR->GetSampler("DEFAULT")));
+//
+//	pData->m_pMesh->SetMeshMaterial(RESOURCEMGR->GetMaterial("DEFAULT"));
+//}
 bool CGameObject::Begin() {
 
 	XMStoreFloat4x4(&m_xmf4x4World, XMMatrixIdentity());
 
 	m_pRenderContainer = RCSELLER->GetRenderContainer(m_objectID);
-	if (m_pRenderContainer->GetMesh())//mesh가 있으면
-	{//aabb 해당 mesh에서 aabb를 얻어온다.
-		m_OriBoundingBox = m_pRenderContainer->GetMesh()->GetAABB();
-	}
-	else {//없으면 최대 최소 aabb를 얻어온다.
-		BoundingBox::CreateFromPoints(m_OriBoundingBox, XMVectorSet(+10.f, +10.f, +10.f, 0.f), XMVectorSet(-10.f, -10.f, -10.f, 0.f));
-	}
+	//if (m_pRenderContainer->GetMesh())//mesh가 있으면
+	//{//aabb 해당 mesh에서 aabb를 얻어온다.
+	//	m_OriBoundingBox = m_pRenderContainer->GetMesh()->GetAABB();
+	//}
+	//else {//없으면 최대 최소 aabb를 얻어온다.
+	//	BoundingBox::CreateFromPoints(m_OriBoundingBox, XMVectorSet(+10.f, +10.f, +10.f, 0.f), XMVectorSet(-10.f, -10.f, -10.f, 0.f));
+	//}
 
 	if (m_pRenderContainer->GetAnimater()) m_pAnimater = m_pRenderContainer->GetAnimater();
 
@@ -88,7 +88,7 @@ bool CGameObject::End() {
 }
 
 void CGameObject::Animate(float fTimeElapsed) {
-	DEBUGER->RegistCoordinateSys(GetWorldMtx());
+//	DEBUGER->RegistCoordinateSys(GetWorldMtx());
 
 	//모든 컴포넌트를 돌면서 Update실행
 	for (auto i : m_mapComponents) {
@@ -326,9 +326,9 @@ void CGameObject::RegistToContainer() {
 }
 
 void CGameObject::RegistToDebuger(){
-	BoundingBox BoundingBox;
-	GetMainBoundingBox(BoundingBox);
-	DEBUGER->RegistAABB(BoundingBox);
+//	BoundingBox BoundingBox;
+//	GetMainBoundingBox(BoundingBox);
+//	DEBUGER->RegistAABB(BoundingBox);
 }
 
 //void CGameObject::SetRenderContainer(CRenderContainerSeller * pSeller) {
@@ -343,8 +343,8 @@ void CGameObject::RegistToDebuger(){
 //}
 float CGameObject::GetTerrainHeight(){
 
-	return m_pTerrainContainer->GetHeight(GetPosition());
-//	return 100.0f;
+	//return m_pTerrainContainer->GetHeight(GetPosition());
+	return 100.0f;
 }
 //flustum culling
 bool CGameObject::IsVisible(shared_ptr<CCamera> pCamera){
@@ -359,12 +359,12 @@ bool CGameObject::IsVisible(shared_ptr<CCamera> pCamera){
 }
 
 void CGameObject::GetMainBoundingBox(BoundingBox& out){
-	out = m_OriBoundingBox;
-	if (m_pAnimater) {
-		out = m_pAnimater->GetMainAABB()->GetAABB();
-	}
-
-	out.Transform(out, GetWorldMtx());
+//	out = m_OriBoundingBox;
+//	if (m_pAnimater) {
+//		out = m_pAnimater->GetMainAABB()->GetAABB();
+//	}
+//
+//	out.Transform(out, GetWorldMtx());
 }
 
 bool CGameObject::CheckPickObject(XMVECTOR xmvWorldCameraStartPos, XMVECTOR xmvRayDir, float & distance){
@@ -374,48 +374,48 @@ bool CGameObject::CheckPickObject(XMVECTOR xmvWorldCameraStartPos, XMVECTOR xmvR
 }
 
 void CGameObject::PickingProc(){
-	CreateObjectUI();
+	//CreateObjectUI();
 
-	CreateMeshUI();
+	//CreateMeshUI();
 
-	if (m_pAnimater) {
-		m_pAnimater->CreateAnimationUI();
-	}
+	//if (m_pAnimater) {
+	//	m_pAnimater->CreateAnimationUI();
+	//}
 }
 
 void CGameObject::CreateObjectUI(){
-	const char* barName = "PickingBar";
-	TWBARMGR->DeleteBar(barName);
-	TWBARMGR->AddBar(barName);
-	//set param
-	TWBARMGR->SetBarSize(barName, 250, 200);
-	TWBARMGR->SetBarPosition(barName, 0, 0);
-	TWBARMGR->SetBarColor(barName, 255, 0, 0);
-	TWBARMGR->SetBarContained(barName, true);
-	TWBARMGR->SetBarMovable(barName, false);
-	TWBARMGR->SetBarResizable(barName, false);
-	//set param
-	TWBARMGR->AddRotationMinMaxBar(barName, "Rotation World", "Rotate", this);
-	TWBARMGR->AddPositionBar(barName, "Position", "Position", this, 0.f, SPACE_SIZE - 1.0f, 1.0f);
-	TWBARMGR->AddScaleBar(barName, "Scale", "Scale", this, 0.1f, 100.f, 0.1f);
+	//const char* barName = "PickingBar";
+	//TWBARMGR->DeleteBar(barName);
+	//TWBARMGR->AddBar(barName);
+	////set param
+	//TWBARMGR->SetBarSize(barName, 250, 200);
+	//TWBARMGR->SetBarPosition(barName, 0, 0);
+	//TWBARMGR->SetBarColor(barName, 255, 0, 0);
+	//TWBARMGR->SetBarContained(barName, true);
+	//TWBARMGR->SetBarMovable(barName, false);
+	//TWBARMGR->SetBarResizable(barName, false);
+	////set param
+	//TWBARMGR->AddRotationMinMaxBar(barName, "Rotation World", "Rotate", this);
+	//TWBARMGR->AddPositionBar(barName, "Position", "Position", this, 0.f, SPACE_SIZE - 1.0f, 1.0f);
+	//TWBARMGR->AddScaleBar(barName, "Scale", "Scale", this, 0.1f, 100.f, 0.1f);
 
 }
 
 void CGameObject::CreateMeshUI(){
-	const char* barName = "MeshInfo";
-	TWBARMGR->DeleteBar(barName);
-	TWBARMGR->AddBar(barName);
-	//set param
-	TWBARMGR->SetBarSize(barName, 250, 200);
-	TWBARMGR->SetBarPosition(barName, 750, 0);
-	TWBARMGR->SetBarColor(barName, 255, 0, 255);
-	TWBARMGR->SetBarContained(barName, true);
-	TWBARMGR->SetBarMovable(barName, false);
-	TWBARMGR->SetBarResizable(barName, false);
+	//const char* barName = "MeshInfo";
+	//TWBARMGR->DeleteBar(barName);
+	//TWBARMGR->AddBar(barName);
+	////set param
+	//TWBARMGR->SetBarSize(barName, 250, 200);
+	//TWBARMGR->SetBarPosition(barName, 750, 0);
+	//TWBARMGR->SetBarColor(barName, 255, 0, 255);
+	//TWBARMGR->SetBarContained(barName, true);
+	//TWBARMGR->SetBarMovable(barName, false);
+	//TWBARMGR->SetBarResizable(barName, false);
 	//set param
 
-	TWBARMGR->AddMinMaxBarCB(barName, "SelectMesh", "SelectMeshIndex",
-		SetSelectMeshCallback, GetSelectMeshCallback, this, 0.f, m_pRenderContainer->GetvMesh().size() - 1, 1.f);
+	//TWBARMGR->AddMinMaxBarCB(barName, "SelectMesh", "SelectMeshIndex",
+	//	SetSelectMeshCallback, GetSelectMeshCallback, this, 0.f, m_pRenderContainer->GetvMesh().size() - 1, 1.f);
 
 //	TWBARMGR->AddButtonCB(barName, "SetSelect", "MeshTexture", SetMeshTextureButtonCallback, this);
 	//char menuName[64];
@@ -428,33 +428,33 @@ void CGameObject::CreateMeshUI(){
 
 void CGameObject::CreateMenuMeshTextureUI(){
 
-	const char* barName{ "LoadTextureFile" };
-	TWBARMGR->AddBar(barName);
+	//const char* barName{ "LoadTextureFile" };
+	//TWBARMGR->AddBar(barName);
 
-	vector<wstring> vFile;
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".jpg");
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".JPG");
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".png");
-	DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".PNG");
+	//vector<wstring> vFile;
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".jpg");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".JPG");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".png");
+	//DIRECTORYFINDER->GetFiles(vFile, L"../inputdata", true, true, L".PNG");
 
-	const char* groupName = "TextureFile";
-	char menuName[64];
-	int cnt{ 0 };
-	m_vStructLoadTextureFile.resize(vFile.size());
-	for (auto data : vFile) {
-		string s{ "" };
-		s.assign(data.cbegin(), data.cend());
-		m_vStructLoadTextureFile[cnt] = StructLoadTextureFile{ m_pRenderContainer->GetMesh(m_indexSelectMesh), s };
-		sprintf(menuName, "%s", s.c_str());
-		TWBARMGR->AddButtonCB(barName, groupName, menuName, LoadTextureFileCallback, &m_vStructLoadTextureFile[cnt]);
-		cnt++;
-	}
+	//const char* groupName = "TextureFile";
+	//char menuName[64];
+	//int cnt{ 0 };
+	//m_vStructLoadTextureFile.resize(vFile.size());
+	//for (auto data : vFile) {
+	//	string s{ "" };
+	//	s.assign(data.cbegin(), data.cend());
+	//	m_vStructLoadTextureFile[cnt] = StructLoadTextureFile{ m_pRenderContainer->GetMesh(m_indexSelectMesh), s };
+	//	sprintf(menuName, "%s", s.c_str());
+	//	TWBARMGR->AddButtonCB(barName, groupName, menuName, LoadTextureFileCallback, &m_vStructLoadTextureFile[cnt]);
+	//	cnt++;
+	//}
 
 }
 
 
 //생성자는 위에서부터 
-CGameObject::CGameObject(string name, tag t) : CObject(name, t) {
+CGameObject::CGameObject(string name, tag t) : CMyObject(name, t) {
 	XMStoreFloat4x4(&m_xmf4x4World, XMMatrixIdentity());
 }
 CGameObject ::~CGameObject() {

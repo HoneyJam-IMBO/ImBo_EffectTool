@@ -216,12 +216,14 @@ enum shader_value_num {
 #define COORD_NUM 5000
 //singleton
 
-#include "GlobalValueManager.h"
-#define			GLOBALVALUEMGR	CGlobalValueManager::GetInstance()
+#include "GraphicDev.h"
+#define			GLOBALVALUEMGR	CGraphicDev::GetInstance()
 #include "ResourceManager.h"
 #define			RESOURCEMGR		CResourceManager::GetInstance()
 #include "RenderContainerSeller.h"
 #define			RCSELLER		CRenderContainerSeller::GetInstance()
 #include "Renderer.h"
 #define			RENDERER	CRenderer::GetInstance()
-#define USE_ANIM
+#include "InputManager.h"
+#define			INPUTMGR		CInputManager::GetInstance()
+//#define USE_ANIM

@@ -50,7 +50,11 @@ public:
 public:
 	void InitDevice();
 
-
+	ID3D11Device* GetDevice() { return m_pd3dDevice; }
+	ID3D11DeviceContext* GetDeviceContext() { return m_pd3dDeviceContext; }
+	IDXGISwapChain* GetSwapChain() { return m_pdxgiSwapChain; }
+	RECT GetrcClient() { return m_rcClient; }
+	HWND GethWnd() { return g_hWnd; }
 private:
 	bool CreateD3D11Deivce();
 	bool CreateRenderTargetView();

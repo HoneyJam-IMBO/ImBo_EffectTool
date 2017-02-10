@@ -365,23 +365,23 @@ bool CGraphicDev::CreateRenderTargetView()
 		UINT Slot = { 0 };
 		UINT BindFlag = { BIND_PS };
 		//make sampler
-		shared_ptr<CSampler> pSampler = make_shared<CSampler>(m_pd3dDevice, m_pd3dDeviceContext);
+		shared_ptr<CSampler> pSampler = make_shared<CSampler>();
 		pSampler->Begin();
-		shared_ptr<CTexture> pTexture = make_shared<CTexture>(m_pd3dDevice, m_pd3dDeviceContext);
+		shared_ptr<CTexture> pTexture = make_shared<CTexture>();
 		pTexture->Begin(pd3dSRV, pSampler, Slot, BindFlag);
 		m_vObjectLayerResultTexture.push_back(pTexture);
 
 		pd3dSRV = { m_pd3dsrvNormal };
 		Slot = { 1 };
 		BindFlag = { BIND_PS };
-		pTexture = make_shared<CTexture>(m_pd3dDevice, m_pd3dDeviceContext);
+		pTexture = make_shared<CTexture>();
 		pTexture->Begin(pd3dSRV, pSampler, Slot, BindFlag);
 		m_vObjectLayerResultTexture.push_back(pTexture);
 
 		pd3dSRV = { m_pd3dsrvSpecPow };
 		Slot = { 2 };
 		BindFlag = { BIND_PS };
-		pTexture = make_shared<CTexture>(m_pd3dDevice, m_pd3dDeviceContext);
+		pTexture = make_shared<CTexture>();
 		pTexture->Begin(pd3dSRV, pSampler, Slot, BindFlag);
 		m_vObjectLayerResultTexture.push_back(pTexture);
 		//---------------------make texture---------------------
@@ -392,12 +392,12 @@ bool CGraphicDev::CreateRenderTargetView()
 		m_pd3dDevice->CreateRenderTargetView(m_pd3dtxtLight, &d3dRTVDesc, &m_pd3drtvLight);
 		m_pd3dDevice->CreateShaderResourceView(m_pd3dtxtLight, &d3dSRVDesc, &m_pd3dsrvLight);
 
-		pTexture = make_shared<CTexture>(m_pd3dDevice, m_pd3dDeviceContext);
+		pTexture = make_shared<CTexture>();
 		//make texture
 		UINT LightTexSlot = { 0 };
 		UINT LightTexBindFlag = { BIND_PS | BIND_CS };
 		//make sampler
-		shared_ptr<CSampler> pLightTexSampler = make_shared<CSampler>(m_pd3dDevice, m_pd3dDeviceContext);
+		shared_ptr<CSampler> pLightTexSampler = make_shared<CSampler>();
 		UINT LightTexSamplerBindFlag = { BIND_PS | BIND_CS };
 		UINT LightTexSamplerSlot = { 0 };
 		pLightTexSampler->Begin(LightTexSamplerSlot, LightTexSamplerBindFlag);

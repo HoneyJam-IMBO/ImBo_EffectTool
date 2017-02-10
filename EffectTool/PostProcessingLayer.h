@@ -3,10 +3,7 @@
 #include "Texture.h"
 //#include "RenderContainerSeller.h"
 
-#include "PostProcessingShader.h"
-#include "TestDeferredMesh.h"
 
-#include "InstancingShader.h"
 #include "DownScaleFirstPass.h"
 #include "DownScaleSecondPass.h"
 
