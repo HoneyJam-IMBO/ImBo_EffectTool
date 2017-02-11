@@ -1,10 +1,14 @@
 
 // EffectToolView.h : CEffectToolView 클래스의 인터페이스
 //
-
 #pragma once
+
+#include "FreeCamera.h"
+
+
 #define RENDER_TARGET_NUMBER 3
 
+class CScene;
 class CDirectionalLight;
 class CGraphicDev;
 class CRenderThread;
@@ -15,11 +19,11 @@ protected: // serialization에서만 만들어집니다.
 	CEffectToolView();
 	DECLARE_DYNCREATE(CEffectToolView)
 
-// 특성입니다.
+	// 특성입니다.
 public:
 	CEffectToolDoc* GetDocument() const;
 
-// 작업입니다.
+	// 작업입니다.
 public:
 	float		m_fTimeDelta{ 0.f };
 	HANDLE		m_LoopEvent;
@@ -29,6 +33,8 @@ public:
 	CGraphicDev*		m_pGraphicDev;
 
 	CDirectionalLight* m_pDirectionalLight{ nullptr };
+	shared_ptr<CCamera> m_pCamera{ nullptr };
+	CScene*				m_pScene{ nullptr };
 // 재정의입니다.
 public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.

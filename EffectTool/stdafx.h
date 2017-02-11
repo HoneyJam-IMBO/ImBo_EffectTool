@@ -226,4 +226,6 @@ enum shader_value_num {
 #define			RENDERER	CRenderer::GetInstance()
 #include "InputManager.h"
 #define			INPUTMGR		CInputManager::GetInstance()
+#include "Timer.h"
+#define			TIMEMGR			CGameTimer::GetInstance()
 //#define USE_ANIM

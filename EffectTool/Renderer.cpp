@@ -27,11 +27,6 @@ bool CRenderer::Begin() {
 	m_pLightLayer->Begin();
 	//layer
 
-	//ao compute shader
-	m_pCSAONormalDepthDownScale = CComputeShader::CreateComputeShader(TEXT("CSAONormalDepthDownScale.cso"));
-	m_pCSSSAOCompute = CComputeShader::CreateComputeShader(TEXT("CSSSAOCompute.cso"));
-	//ao compute shader
-
 	// render target과 depth-stencil buffer 생성/ deferred texture 생성
 	if (!CreateRenderTargetView()) {
 		MessageBox(GLOBALVALUEMGR->GethWnd(), TEXT("RenderTarget이나 Depth-Stencil 버퍼 생성이 실패했습니다. 프로그램을 종료합니다."), TEXT("프로그램 구동 실패"), MB_OK);
@@ -44,14 +39,7 @@ bool CRenderer::End() {
 	if (m_pdxgiSwapChain) m_pdxgiSwapChain->Release();
 	if (m_pd3dRenderTargetView) m_pd3dRenderTargetView->Release();
 	if (m_pd3ddsvReadOnlyDepthStencil) m_pd3ddsvReadOnlyDepthStencil->Release();
-	if (m_pCSAONormalDepthDownScale) {
-		m_pCSAONormalDepthDownScale->End();
-		delete m_pCSAONormalDepthDownScale;
-	}
-	if (m_pCSSSAOCompute) {
-		m_pCSSSAOCompute->End();
-		delete m_pCSSSAOCompute;
-	}
+	
 	if(m_pTDoownscaleCB) delete m_pTDoownscaleCB;
 	if (m_pd3dbufAOConstantBuffer)m_pd3dbufAOConstantBuffer->Release();
 	m_pd3dbufAOConstantBuffer = nullptr;
@@ -87,64 +75,14 @@ void CRenderer::Render(shared_ptr<CCamera> pCamera) {
 	//object render
 	ObjectRender(pCamera);
 
-	//ambient occulution 과정
-	//set
-	// Constants
-	D3D11_MAPPED_SUBRESOURCE MappedResource;
-	GLOBALVALUEMGR->GetDeviceContext()->Map(m_pd3dbufAOConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &MappedResource);
-	TDownscaleCB* pDownscale = (TDownscaleCB*)MappedResource.pData;
-	pDownscale->nWidth = GLOBALVALUEMGR->GetrcClient().right / 2;
-	pDownscale->nHeight = GLOBALVALUEMGR->GetrcClient().bottom / 2;
-	pDownscale->fHorResRcp = 1.0f / (float)pDownscale->nWidth;
-	pDownscale->fVerResRcp = 1.0f / (float)pDownscale->nHeight;
-	const XMFLOAT4X4 pProj = pCamera->GetProjectionFloat4x4();
-	pDownscale->ProjParams.x = 1.0f / pProj.m[0][0];
-	pDownscale->ProjParams.y = 1.0f / pProj.m[1][1];
-	float fQ = pCamera->GetFarClip() / (pCamera->GetFarClip() - pCamera->GetNearClip());
-	pDownscale->ProjParams.z = -pCamera->GetNearClip() * fQ;
-	pDownscale->ProjParams.w = -fQ;
-	XMStoreFloat4x4(&pDownscale->ViewMtx, pCamera->GetViewMtx());
-	float m_fSSAOSampRadius = 20.f;
-	float m_fRadius = 10.f;
-	pDownscale->fOffsetRadius = m_fSSAOSampRadius;
-	pDownscale->fRadius = m_fRadius;
-	pDownscale->fMaxDepth = pCamera->GetFarClip();
-	GLOBALVALUEMGR->GetDeviceContext()->Unmap(m_pd3dbufAOConstantBuffer, 0);
-	ID3D11Buffer* arrConstBuffers[1] = { m_pd3dbufAOConstantBuffer };
-	GLOBALVALUEMGR->GetDeviceContext()->CSSetConstantBuffers(0, 1, arrConstBuffers);
-
 	SetRenderTargetViews(1, &m_pd3drtvLight, m_pd3ddsvReadOnlyDepthStencil);
-	//m_pFrameWork->SetMainRenderTargetView();
 	for (auto texture : m_vObjectLayerResultTexture) {
 		texture->SetShaderState();
 	}
-	ID3D11UnorderedAccessView* pUAVs[1] = { m_pd3duavAOMiniNormalDepth };
-	GLOBALVALUEMGR->GetDeviceContext()->CSSetUnorderedAccessViews(0, 1, pUAVs, (UINT*)(&pUAVs));
-
-	m_pCSAONormalDepthDownScale->ExcuteShaderState();
+	
 	//clear
-	pUAVs[0] = { nullptr };
+	ID3D11UnorderedAccessView* pUAVs[1] = { nullptr };
 	GLOBALVALUEMGR->GetDeviceContext()->CSSetUnorderedAccessViews(0, 1, pUAVs, (UINT*)(&pUAVs));
-
-	//set
-	ID3D11ShaderResourceView* pSRVs[1] = { m_pd3dsrvAOMiniNormalDepth };
-	GLOBALVALUEMGR->GetDeviceContext()->CSSetShaderResources(0, 1, pSRVs);
-	pUAVs[0] = { m_pd3duavAmbientOcculution };
-	GLOBALVALUEMGR->GetDeviceContext()->CSSetUnorderedAccessViews(0, 1, pUAVs, (UINT*)(&pUAVs));
-
-	m_pCSSSAOCompute->ExcuteShaderState();
-	//clear
-	pUAVs[0] = { nullptr };
-	GLOBALVALUEMGR->GetDeviceContext()->CSSetUnorderedAccessViews(0, 1, pUAVs, (UINT*)(&pUAVs));
-
-	//ambient occulution 과정
-
-	//light render
-	//ClearDepthStencilView(m_pd3dDepthStencilView);
-	//set light rtv
-	pSRVs[0] = { m_pd3dsrvAmbientOcculution };
-	GLOBALVALUEMGR->GetDeviceContext()->PSSetShaderResources(4, 1, pSRVs);
-
 	LightRender(pCamera);
 	for (auto texture : m_vObjectLayerResultTexture) {
 		texture->CleanShaderState();
@@ -164,31 +102,6 @@ void CRenderer::Render(shared_ptr<CCamera> pCamera) {
 	for (auto texture : m_vLightLayerResultTexture) {
 		texture->CleanShaderState();
 	}
-	
-	//if (INPUTMGR->GetDebugMode()) {
-	//	ID3D11Buffer* pGBufferUnpackingBuffer = pCamera->GetGBufferUnpackingBuffer();
-	//	GLOBALVALUEMGR->GetDeviceContext()->PSSetConstantBuffers(PS_UNPACKING_SLOT, 1, &pGBufferUnpackingBuffer);
-
-	//	//if(testBotton){
-	//	DEBUGER->AddTexture(XMFLOAT2(100, 100), XMFLOAT2(250, 250), m_pd3dsrvColorSpecInt);
-	//	DEBUGER->AddTexture(XMFLOAT2(100, 250), XMFLOAT2(250, 400), m_pd3dsrvNormal);
-	//	DEBUGER->AddTexture(XMFLOAT2(100, 400), XMFLOAT2(250, 550), m_pd3dsrvLight);
-	//	DEBUGER->AddTexture(XMFLOAT2(250, 100), XMFLOAT2(500, 250), m_pd3dsrvAmbientOcculution);
-	//	//DEBUGER->AddTexture(XMFLOAT2(100, 100), XMFLOAT2(500, 500), m_pd3dsrvDepthStencil);
-	//	//DEBUGER->AddTexture(XMFLOAT2(0, 0), XMFLOAT2(1000, 1000), m_pd3dsrvAmbientOcculution);
-
-	//	//이건 꼭 여기서 해줘야함.
-
-	//	DEBUGER->RenderTexture();
-	//	DEBUGER->RenderText();
-	//	//DEBUGER->ClearDebuger();
-	//}
-	//else {
-	//	DEBUGER->ClearDebuger();
-	//}
-
-	////	//ui
-	//TWBARMGR->Render();
 
 	//present
 	m_pdxgiSwapChain->Present(0, 0);
@@ -223,8 +136,8 @@ void CRenderer::ClearDepthStencilView(ID3D11DepthStencilView* pDepthStencilView)
 }
 void CRenderer::SetForwardRenderTargets() {
 	ID3D11RenderTargetView *pd3dRTVs[3] = { m_pd3drtvColorSpecInt, m_pd3drtvNormal, m_pd3drtvSpecPow };
-	//float fClearColor[4] = { xmf4Xolor.x, xmf4Xolor.y, xmf4Xolor.z, xmf4Xolor.w };
-	float fClearColor[4] = { 0.f, 0.f, 0.f, 0.f };
+	//float fClearColor[4] = { xmf4Xolor.x, xmf4Xo4lor.y, xmf4Xolor.z, xmf4Xolor.w };
+	float fClearColor[4] = { 0.f, 0.f, 1.f, 1.f };
 	if (m_pd3drtvColorSpecInt) GLOBALVALUEMGR->GetDeviceContext()->ClearRenderTargetView(m_pd3drtvColorSpecInt, fClearColor);
 	if (m_pd3drtvNormal) GLOBALVALUEMGR->GetDeviceContext()->ClearRenderTargetView(m_pd3drtvNormal, fClearColor);
 	if (m_pd3drtvSpecPow) GLOBALVALUEMGR->GetDeviceContext()->ClearRenderTargetView(m_pd3drtvSpecPow, fClearColor);
@@ -569,8 +482,6 @@ bool CRenderer::CreateRenderTargetView() {
 	CBDesc.ByteWidth = sizeof(TDownscaleCB);
 	GLOBALVALUEMGR->GetDevice()->CreateBuffer(&CBDesc, NULL, &m_pd3dbufAOConstantBuffer);
 
-	m_pCSAONormalDepthDownScale->SetThreadGroup((UINT)ceil((float)(nWidth * nHeight) / 1024.0f), 1, 1);
-	m_pCSSSAOCompute->SetThreadGroup((UINT)ceil((float)(nWidth * nHeight) / 1024.0f), 1, 1);
 	}
 	return true;
 }

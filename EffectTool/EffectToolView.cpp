@@ -15,6 +15,7 @@
 #include "RenderThread.h"
 #include "GraphicDev.h"
 #include "DirectionalLight.h"
+#include "SceneMain.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -87,14 +88,38 @@ void CEffectToolView::OnInitialUpdate()
 	INPUTMGR->Begin();
 
 
+	m_pCamera = make_shared<CFreeCamera>();
+	//------------------------------------------카메라 제작--------------------------------------
+	m_pCamera->Begin();
+	m_pCamera->GenerateProjectionMatrix(
+		// FOV Y 값 : 클 수록 멀리까지 볼 수 있다.
+		60.0f * XM_PI / 180.0f
+		, float(m_pGraphicDev->GetrcClient().right) / float(m_pGraphicDev->GetrcClient().bottom)
+		, 0.01f, 10000.0f);
+
+	//위치 조정
+
+	//viewprojection행렬 제작
+	XMVECTOR eye = { 0.0f, 58.f, 00.0f, 0.0f };
+	XMVECTOR at = { 500.0f, 0.0f, 500.0f, 0.0f };
+	XMVECTOR up = { 0.0f, 1.0f, 0.0f, 0.0f };
+
+	m_pCamera->SetLookAt(eye, at, up);
+	// RS에 뷰포트 연결
+	m_pCamera->SetViewport(0, 0, m_pGraphicDev->GetrcClient().right, m_pGraphicDev->GetrcClient().bottom, 0.0f, 1.0f);
+
+
+	m_pScene = new CSceneMain(m_pCamera.get());
+	m_pScene->Begin();
+
 	//framework.Begin(hInst, hWnd);
 	//framework.ChangeScene(new CSceneMain(&framework));
 
-	m_pDirectionalLight = new CDirectionalLight;
-	m_pDirectionalLight->Begin(DIRECTIONAL_AMBIENT_LIGHT{
-		XMFLOAT4(1.0f, -1.0f, 1.0f, 0.0f),XMFLOAT4(0.0, 0.1, 0.1, 0.0) , XMFLOAT4(1.5f, 1.5f, 1.5f, 1),//dir
-		XMFLOAT4(0.1, 0.1, 0.1, 1), XMFLOAT4(0.1f, 0.1f, 0.1f, 1), XMFLOAT4(0.1f, 0.1f, 0.1f, 1), XMFLOAT4(5.1f, 5.1f, 5.1f, 1)//ambient
-	});
+	//m_pDirectionalLight = new CDirectionalLight;
+	//m_pDirectionalLight->Begin(DIRECTIONAL_AMBIENT_LIGHT{
+	//	XMFLOAT4(1.0f, -1.0f, 1.0f, 0.0f),XMFLOAT4(0.0, 0.1, 0.1, 0.0) , XMFLOAT4(1.5f, 1.5f, 1.5f, 1),//dir
+	//	XMFLOAT4(0.1, 0.1, 0.1, 1), XMFLOAT4(0.1f, 0.1f, 0.1f, 1), XMFLOAT4(0.1f, 0.1f, 0.1f, 1), XMFLOAT4(5.1f, 5.1f, 5.1f, 1)//ambient
+	//});
 }
 
 // CEffectToolView 그리기
@@ -108,45 +133,22 @@ void CEffectToolView::OnDraw(CDC* /*pDC*/)
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 	WaitForSingleObject(m_RenderEvent, INFINITE);
+	TIMEMGR->Tick();
+	float fDeltaTime = TIMEMGR->GetTimeElapsed();
+	//Update
+	RENDERER->Update(fDeltaTime);
+	m_pCamera->Update(fDeltaTime);
+	m_pScene->Animate(fDeltaTime);
 
-	//m_pGraphicDev->m_pd3dDeviceContext->ClearDepthStencilView(m_pGraphicDev->m_pd3dDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	//ID3D11RenderTargetView *pd3dRTVs[RENDER_TARGET_NUMBER] = { m_pGraphicDev->m_pd3drtvColorSpecInt, m_pGraphicDev->m_pd3drtvNormal, m_pGraphicDev->m_pd3drtvSpecPow };
-	//float fClearColor[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
-	//if (m_pGraphicDev->m_pd3drtvColorSpecInt)
-	//	m_pGraphicDev->m_pd3dDeviceContext->ClearRenderTargetView(m_pGraphicDev->m_pd3drtvColorSpecInt, fClearColor);
-	//if (m_pGraphicDev->m_pd3drtvNormal)
-	//	m_pGraphicDev->m_pd3dDeviceContext->ClearRenderTargetView(m_pGraphicDev->m_pd3drtvNormal, fClearColor);
-	//if (m_pGraphicDev->m_pd3drtvSpecPow)
-	//	m_pGraphicDev->m_pd3dDeviceContext->ClearRenderTargetView(m_pGraphicDev->m_pd3drtvSpecPow, fClearColor);
+	//Render
+	m_pCamera->SetShaderState();
+	RENDERER->Render(m_pCamera);
 
-	//m_pGraphicDev->m_pd3dDeviceContext->OMSetRenderTargets(RENDER_TARGET_NUMBER, pd3dRTVs, m_pGraphicDev->m_pd3dDepthStencilView);
-
-
-	////Light
-	//m_pGraphicDev->m_pd3dDeviceContext->ClearDepthStencilView(m_pGraphicDev->m_pd3dDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	//m_pGraphicDev->m_pd3dDeviceContext->OMSetRenderTargets(1, &m_pGraphicDev->m_pd3drtvLight, m_pGraphicDev->m_pd3dDepthStencilView);
-
-	//for (auto texture : m_pGraphicDev->m_vObjectLayerResultTexture) {
-	//	texture->SetShaderState();
-	//}
-	////m_stackScene.top()->LightRender();
-
-
-	//for (auto texture : m_pGraphicDev->m_vObjectLayerResultTexture) {
-	//	texture->CleanShaderState();
-
-	//}
-
-	int k = 0;
-
-	m_pGraphicDev->m_pdxgiSwapChain->Present(0, 0);
+	//m_pGraphicDev->m_pdxgiSwapChain->Present(0, 0);
 	SetEvent(m_LoopEvent);
 }
 
-
 // CEffectToolView 인쇄
-
-
 void CEffectToolView::OnFilePrintPreview()
 {
 #ifndef SHARED_HANDLERS

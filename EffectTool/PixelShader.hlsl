@@ -1,5 +1,6 @@
 #include "PackGbuffer.hlsli"
 
+
 struct Material {
 	float3 normal;
 	float4 diffuseColor;

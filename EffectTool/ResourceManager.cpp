@@ -238,55 +238,7 @@ void CResourceManager::CreateRenderShaders(){
 	pShader->Begin();
 	m_mRenderShader.insert(pairShader("DirectionalLight", pShader));
 
-	pShader = make_shared<CRenderShader>();
-	pShader->CreateVS(TEXT("VSPointLight.cso"));
-	pShader->CreateHS(TEXT("HSPointLight.cso"));
-	pShader->CreateDS(TEXT("DSPointLight.cso"));
-	pShader->CreatePS(TEXT("PSPointLight.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("PointLight", pShader));
 	
-	pShader = make_shared<CRenderShader>();
-	pShader->CreateVS(TEXT("VSPointLight.cso"));
-	pShader->CreateHS(TEXT("HSPointLight.cso"));
-	pShader->CreateDS(TEXT("DSPointLight.cso"));
-	pShader->CreatePS(TEXT("PSDebugLight.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("DebugPointLight", pShader));
-
-	pShader = make_shared<CRenderShader>();
-	pShader->CreateVS(TEXT("VSCapsuleLight.cso"));
-	pShader->CreateHS(TEXT("HSCapsuleLight.cso"));
-	pShader->CreateDS(TEXT("DSCapsuleLight.cso"));
-	pShader->CreatePS(TEXT("PSCapsuleLight.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("CapsuleLight", pShader));
-
-	pShader = make_shared<CRenderShader>();
-	pShader->CreateVS(TEXT("VSCapsuleLight.cso"));
-	pShader->CreateHS(TEXT("HSCapsuleLight.cso"));
-	pShader->CreateDS(TEXT("DSCapsuleLight.cso"));
-	pShader->CreatePS(TEXT("PSDebugLight.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("DebugCapsuleLight", pShader));
-
-	pShader = make_shared<CRenderShader>();
-	pShader->CreateVS(TEXT("VSSpotLight.cso"));
-	pShader->CreateHS(TEXT("HSSpotLight.cso"));
-	pShader->CreateDS(TEXT("DSSpotLight.cso"));
-	pShader->CreatePS(TEXT("PSSpotLight.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("SpotLight", pShader));
-
-	pShader = make_shared<CRenderShader>();
-	pShader->CreateVS(TEXT("VSSpotLight.cso"));
-	pShader->CreateHS(TEXT("HSSpotLight.cso"));
-	pShader->CreateDS(TEXT("DSSpotLight.cso"));
-	pShader->CreatePS(TEXT("PSDebugLight.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("DebugSpotLight", pShader));
-	//light shader
-
 	//post processing shader
 	pShader = make_shared<CRenderShader>();
 	D3D11_INPUT_ELEMENT_DESC PostProcessingvertexDesc[] =
@@ -299,84 +251,7 @@ void CResourceManager::CreateRenderShaders(){
 	pShader->Begin();
 	m_mRenderShader.insert(pairShader("PostProcessing", pShader));
 	//post processing shader
-	//terrain
-	pShader = make_shared<CRenderShader>();
-	D3D11_INPUT_ELEMENT_DESC TerrainvertexDesc[] =
-	{
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "BITANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 2, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "INSTANCEPOS", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 3, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 3, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 3, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 3, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 }
-	};
-	pShader->CreateVS(TEXT("VSTerrain.cso"), TerrainvertexDesc, 7);
-	pShader->CreateHS(TEXT("HSTerrain.cso"));
-	pShader->CreateDS(TEXT("DSTerrain.cso"));
-	pShader->CreatePS(TEXT("PSTerrain.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("Terrain", pShader));
-	//terrain
-	//BoundingBox
-	pShader = make_shared<CRenderShader>();
-	D3D11_INPUT_ELEMENT_DESC BoundingBoxDesc[] =
-	{
-		{ "INSTANCEPOS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "EXTEND", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "QUATERNION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 }
-	};
-	pShader->CreateVS(TEXT("VSBoundingBox.cso"), BoundingBoxDesc, 3);
-	pShader->CreateGS(TEXT("GSBoundingBox.cso"));
-	pShader->CreatePS(TEXT("PSBoundingBox.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("BoundingBox", pShader));
-	//BoundingBox
 
-	//debug textue
-	D3D11_INPUT_ELEMENT_DESC DebugTextureDesc[] =
-	{
-		{ "LEFTTOP", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "RIGHTBOTTOM", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 }
-	};
-	pShader = make_shared<CRenderShader>();
-	pShader->CreateVS(TEXT("VSDebugTexture.cso"), DebugTextureDesc, 2);
-	pShader->CreateGS(TEXT("GSDebugTexture.cso"));
-	pShader->CreatePS(TEXT("PSDebugTexture.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("DebugTexture", pShader));
-
-	//shader
-	pShader = make_shared<CRenderShader>();
-	D3D11_INPUT_ELEMENT_DESC skyboxVertexDesc[] =
-	{
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "INSTANCEPOS", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 2, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 2, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 2, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 2, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-	};
-	pShader->CreateVS(TEXT("VSSkyBox.cso"), skyboxVertexDesc, 6);
-	pShader->CreatePS(TEXT("PSSkyBox.cso"));
-	m_mRenderShader.insert(pairShader("SkyBox", pShader));
-
-
-	//core render shader
-	pShader = make_shared<CRenderShader>();
-	D3D11_INPUT_ELEMENT_DESC CoordinateSysvertexDesc[] =
-	{
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },//model
-		{ "INSTANCEPOS", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-		{ "INSTANCEPOS", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-	};
-	pShader->CreateVS(TEXT("VSCoordinateSys.cso"), CoordinateSysvertexDesc, 5);
-	pShader->CreatePS(TEXT("PSCoordinateSys.cso"));
-	pShader->Begin();
-	m_mRenderShader.insert(pairShader("CoordinateSys", pShader));
-	//core render shader
 }
 
 void CResourceManager::CreateMeshs(){
@@ -386,6 +261,10 @@ void CResourceManager::CreateMeshs(){
 	pMesh = make_shared<CDirectionalLightMesh>();
 	pMesh->Begin();
 	m_mMesh.insert(pairMesh("DirectionalLight", pMesh));
+
+	pMesh = make_shared<CTestDeferredMesh>();
+	pMesh->Begin();
+	m_mMesh.insert(pairMesh("PostProcessing", pMesh));
 }
 
 //void CResourceManager::CreateAnimater(string path, string animaterName){

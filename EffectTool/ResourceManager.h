@@ -9,7 +9,7 @@
 #include "Texture.h"
 #include "Sampler.h"
 #include "RenderShader.h"
-
+#include "TestDeferredMesh.h"
 
 class CResourceManager : public CSingleTonBase<CResourceManager> {
 

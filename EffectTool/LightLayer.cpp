@@ -76,21 +76,13 @@ void CLightLayer::RenderExcute(shared_ptr<CCamera> pCamera) {
 
 	object_id id = object_id::OBJECT_END;
 	//scene의 모든 Part의 rendercontainer안에 part list Render!
-	for (int i = object_id::OBJECT_END + 1; i < object_id::OBJECT_LIGHT_END; ++i) {
-		id = (object_id)i;
-		if (id == object_id::OBJECT_DIRECTIONAL_LIGHT) {
-			//directional
-			m_mRenderContainer[id]->Render(pCamera);
+	
+	//directional
+	m_mRenderContainer[object_id::OBJECT_DIRECTIONAL_LIGHT]->Render(pCamera);
 
-			GLOBALVALUEMGR->GetDeviceContext()->OMSetBlendState(m_pLightBlendState, nullptr, 0xffffffff);
-			GLOBALVALUEMGR->GetDeviceContext()->OMSetDepthStencilState(m_pLightDepthStencilState, 0);
-			GLOBALVALUEMGR->GetDeviceContext()->RSSetState(m_pLightRasterizerState);
-		}
-		else {
-			m_mRenderContainer[id]->Render(pCamera);
-		}
-
-	}
+	GLOBALVALUEMGR->GetDeviceContext()->OMSetBlendState(m_pLightBlendState, nullptr, 0xffffffff);
+	GLOBALVALUEMGR->GetDeviceContext()->OMSetDepthStencilState(m_pLightDepthStencilState, 0);
+	GLOBALVALUEMGR->GetDeviceContext()->RSSetState(m_pLightRasterizerState);
 
 
 }

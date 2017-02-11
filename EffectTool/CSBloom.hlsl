@@ -19,9 +19,9 @@ static const float4 LUM_FACTOR = float4(0.299, 0.587, 0.114, 0);
 
 #define groupthreads 128
 
+
 [numthreads(1024, 1, 1)]
-void main( uint3 dispatchThreadId : SV_DispatchThreadID ){
-	uint2 CurPixel = uint2(dispatchThreadId.x % Res.x, dispatchThreadId.x / Res.x);
+void main( uint3 dispatchThreadId : SV_DispatchThreadID ){	int2 CurPixel = int2(dispatchThreadId.x % Res.x, dispatchThreadId.x / Res.x);
 
 	//픽셀 결합 생략.. ? ???/ later 연구
 	if (CurPixel.y < Res.y) {

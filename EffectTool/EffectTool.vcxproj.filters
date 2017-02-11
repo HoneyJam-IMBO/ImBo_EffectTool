@@ -175,6 +175,12 @@
     <Filter Include="Framework\88.HLSL\Light\DirectionLight">
       <UniqueIdentifier>{fb488e13-b782-4782-851c-ca76e6128569}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Manager\7.Timer">
+      <UniqueIdentifier>{7f9bb873-c861-401d-8216-95bead82e844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.DXObject\-9.Mesh\PostMesh">
+      <UniqueIdentifier>{5587242a-1335-41e3-985a-72f35b7056b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -321,6 +327,15 @@
     <ClInclude Include="InputManager.h">
       <Filter>02.Manager\6.InputMgr</Filter>
     </ClInclude>
+    <ClInclude Include="FreeCamera.h">
+      <Filter>Framework\01.DXObject\-7.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>02.Manager\7.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="TestDeferredMesh.h">
+      <Filter>Framework\01.DXObject\-9.Mesh\PostMesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -449,6 +464,15 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>02.Manager\6.InputMgr</Filter>
     </ClCompile>
+    <ClCompile Include="FreeCamera.cpp">
+      <Filter>Framework\01.DXObject\-7.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>02.Manager\7.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDeferredMesh.cpp">
+      <Filter>Framework\01.DXObject\-9.Mesh\PostMesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EffectTool.rc">
@@ -476,6 +500,12 @@
     <None Include="res\EffectTool.rc2">
       <Filter>Framework\99.Default\리소스 파일</Filter>
     </None>
+    <None Include="PackGbuffer.hlsli">
+      <Filter>Framework\88.HLSL\Default</Filter>
+    </None>
+    <None Include="UnpackGBuffer.hlsli">
+      <Filter>Framework\88.HLSL\Default</Filter>
+    </None>
     <None Include="CalcDirectionalLight.hlsli">
       <Filter>Framework\88.HLSL\Light\DirectionLight</Filter>
     </None>
@@ -493,19 +523,7 @@
     <FxCompile Include="VSAnimationObject.hlsl">
       <Filter>Framework\88.HLSL\AnimationObject</Filter>
     </FxCompile>
-    <FxCompile Include="CSDownScaleFirstPass.hlsl">
-      <Filter>Framework\88.HLSL\Compute</Filter>
-    </FxCompile>
-    <FxCompile Include="CSDownScaleSecondPass.hlsl">
-      <Filter>Framework\88.HLSL\Compute</Filter>
-    </FxCompile>
-    <FxCompile Include="CSHorizontalBlur.hlsl">
-      <Filter>Framework\88.HLSL\Compute</Filter>
-    </FxCompile>
     <FxCompile Include="CSVerticalBlur.hlsl">
-      <Filter>Framework\88.HLSL\Compute</Filter>
-    </FxCompile>
-    <FxCompile Include="CSBloom.hlsl">
       <Filter>Framework\88.HLSL\Compute</Filter>
     </FxCompile>
     <FxCompile Include="PSDefault.hlsl">
@@ -537,6 +555,18 @@
     </FxCompile>
     <FxCompile Include="VSTestDeferred.hlsl">
       <Filter>Framework\88.HLSL\testInstancing</Filter>
+    </FxCompile>
+    <FxCompile Include="CSBloom.hlsl">
+      <Filter>Framework\88.HLSL\Compute</Filter>
+    </FxCompile>
+    <FxCompile Include="CSDownScaleFirstPass.hlsl">
+      <Filter>Framework\88.HLSL\Compute</Filter>
+    </FxCompile>
+    <FxCompile Include="CSDownScaleSecondPass.hlsl">
+      <Filter>Framework\88.HLSL\Compute</Filter>
+    </FxCompile>
+    <FxCompile Include="CSHorizontalBlur.hlsl">
+      <Filter>Framework\88.HLSL\Compute</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

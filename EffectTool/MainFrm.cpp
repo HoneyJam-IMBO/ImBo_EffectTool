@@ -30,6 +30,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 	ON_REGISTERED_MESSAGE(AFX_WM_CREATETOOLBAR, &CMainFrame::OnToolbarCreateNew)
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
+	ON_WM_GETMINMAXINFO()
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -72,8 +73,8 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/,
 	//	pContext);
 	m_MainSplitter.CreateStatic(this, 1, 2);
 
-	m_MainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMyFormView), CSize(600, 1300), pContext);
-	m_MainSplitter.CreateView(0, 1, RUNTIME_CLASS(CEffectToolView), CSize(1050, 1300), pContext);
+	m_MainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMyFormView), CSize(600, 600), pContext);
+	m_MainSplitter.CreateView(0, 1, RUNTIME_CLASS(CEffectToolView), CSize(1200, 600), pContext);
 
 
 	m_pMyFormView = (CMyFormView*)m_MainSplitter.GetPane(0, 0);
@@ -85,17 +86,26 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/,
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
+
 	if (cs.hMenu != NULL)
 	{
 		::DestroyMenu(cs.hMenu);
 		cs.hMenu = NULL;
 	}
 
-	cs.style &= ~FWS_ADDTOTITLE;
-	LPCTSTR TitleName = _T("ImBo_EffectTool");
-	SetTitle(TitleName);
+	
 	if (!CFrameWndEx::PreCreateWindow(cs))
 		return FALSE;
+	cs.x = 100;
+	cs.y = 100;
+
+
+	cs.style &= ~(FWS_ADDTOTITLE); // 추가 1
+	//cs.cx = 1500; // 추가 2
+	//cs.cy = 900; // 추가 3
+	LPCTSTR TitleName = _T("ImBo_EffectTool");
+	SetTitle(TitleName);
+
 
 	return TRUE;
 }
@@ -248,3 +258,19 @@ BOOL CMainFrame::LoadFrame(UINT nIDResource, DWORD dwDefaultStyle, CWnd* pParent
 	return TRUE;
 }
 
+
+
+void CMainFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+
+	CFrameWndEx::OnGetMinMaxInfo(lpMMI);
+
+	//lpMMI->ptMinTrackSize.x = 1024; 
+	//lpMMI->ptMinTrackSize.y = 768; 
+	//lpMMI->ptMaxTrackSize.x = 1024; 
+	//lpMMI->ptMaxTrackSize.y = 768;
+
+
+}

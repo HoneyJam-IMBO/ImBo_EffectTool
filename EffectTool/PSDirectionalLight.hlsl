@@ -30,6 +30,7 @@ mat.specIntensity = gbd.SpecInt;
 //월드 위치 복원
 float3 positionW = CalcWorldPos(input.cpPos, gbd.LinearDepth);
 float ao = AOTex.Sample(LinearSampler, uv.xy);
+ao = 1.0f;
 
 //엠비언트 및 디렉셔널 라이트 비중 계산
 float4 finalColor;

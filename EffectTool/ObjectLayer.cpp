@@ -60,16 +60,16 @@ void CObjectLayer::SetShaderState(shared_ptr<CCamera> pCamera) {
 void CObjectLayer::RenderExcute(shared_ptr<CCamera> pCamera) {
 	
 	//skybox
-	GLOBALVALUEMGR->GetDeviceContext()->OMGetDepthStencilState(&m_pd3dTempDepthStencilState, &m_TempStencil);
-	GLOBALVALUEMGR->GetDeviceContext()->OMSetDepthStencilState(m_pd3dDepthStencilState, 0);
-	m_mRenderContainer[object_id::OBJECT_SKYBOX]->Render(pCamera);
-	GLOBALVALUEMGR->GetDeviceContext()->OMSetDepthStencilState(m_pd3dTempDepthStencilState, m_TempStencil);
-	//skybox
+	//GLOBALVALUEMGR->GetDeviceContext()->OMGetDepthStencilState(&m_pd3dTempDepthStencilState, &m_TempStencil);
+	//GLOBALVALUEMGR->GetDeviceContext()->OMSetDepthStencilState(m_pd3dDepthStencilState, 0);
+	//m_mRenderContainer[object_id::OBJECT_SKYBOX]->Render(pCamera);
+	//GLOBALVALUEMGR->GetDeviceContext()->OMSetDepthStencilState(m_pd3dTempDepthStencilState, m_TempStencil);
+	////skybox
 
-	//terrain
-	//m_pd3dDeviceContext->RSGetState(&m_pd3dTempRSState);
-	//m_pd3dDeviceContext->RSSetState(m_pd3dSpaceRSState);
-	m_mRenderContainer[object_id::OBJECT_TERRAIN]->Render(pCamera);
+	////terrain
+	////m_pd3dDeviceContext->RSGetState(&m_pd3dTempRSState);
+	////m_pd3dDeviceContext->RSSetState(m_pd3dSpaceRSState);
+	//m_mRenderContainer[object_id::OBJECT_TERRAIN]->Render(pCamera);
 	//m_pd3dDeviceContext->RSSetState(m_pd3dTempRSState);
 	//terrain
 
