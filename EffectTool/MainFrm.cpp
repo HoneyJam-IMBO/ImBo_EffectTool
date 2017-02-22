@@ -73,8 +73,8 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/,
 	//	pContext);
 	m_MainSplitter.CreateStatic(this, 1, 2);
 
-	m_MainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMyFormView), CSize(600, 600), pContext);
-	m_MainSplitter.CreateView(0, 1, RUNTIME_CLASS(CEffectToolView), CSize(1200, 600), pContext);
+	m_MainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMyFormView), CSize(780, 2500), pContext);
+	m_MainSplitter.CreateView(0, 1, RUNTIME_CLASS(CEffectToolView), CSize(2300, 2500), pContext);
 
 
 	m_pMyFormView = (CMyFormView*)m_MainSplitter.GetPane(0, 0);
@@ -97,12 +97,12 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	if (!CFrameWndEx::PreCreateWindow(cs))
 		return FALSE;
 	cs.x = 100;
-	cs.y = 100;
+	cs.y = 50;
 
 
 	cs.style &= ~(FWS_ADDTOTITLE); // 추가 1
-	//cs.cx = 1500; // 추가 2
-	//cs.cy = 900; // 추가 3
+	cs.cx = 1700; // 추가 2
+	cs.cy = 930; // 추가 3
 	LPCTSTR TitleName = _T("ImBo_EffectTool");
 	SetTitle(TitleName);
 

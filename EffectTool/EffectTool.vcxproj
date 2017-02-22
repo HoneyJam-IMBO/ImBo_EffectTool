@@ -216,6 +216,7 @@
     <ClInclude Include="DownScaleFirstPass.h" />
     <ClInclude Include="DownScaleSecondPass.h" />
     <ClInclude Include="DXObject.h" />
+    <ClInclude Include="EffectDig.h" />
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
@@ -234,6 +235,7 @@
     <ClInclude Include="MyFormView.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectLayer.h" />
+    <ClInclude Include="ParticleDig.h" />
     <ClInclude Include="PostProcessingLayer.h" />
     <ClInclude Include="RenderContainer.h" />
     <ClInclude Include="RenderContainerSeller.h" />
@@ -267,6 +269,7 @@
     <ClCompile Include="DownScaleFirstPass.cpp" />
     <ClCompile Include="DownScaleSecondPass.cpp" />
     <ClCompile Include="DXObject.cpp" />
+    <ClCompile Include="EffectDig.cpp" />
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
@@ -284,6 +287,7 @@
     <ClCompile Include="MyFormView.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectLayer.cpp" />
+    <ClCompile Include="ParticleDig.cpp" />
     <ClCompile Include="PostProcessingLayer.cpp" />
     <ClCompile Include="RenderContainer.cpp" />
     <ClCompile Include="RenderContainerSeller.cpp" />

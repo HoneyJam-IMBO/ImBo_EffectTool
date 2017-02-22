@@ -181,6 +181,15 @@
     <Filter Include="Framework\01.DXObject\-9.Mesh\PostMesh">
       <UniqueIdentifier>{5587242a-1335-41e3-985a-72f35b7056b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.View\1.FormView\0.Dialog">
+      <UniqueIdentifier>{dbffe652-2b60-4da2-a302-2b935b50842b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.View\1.FormView\0.Dialog\0.EffectDig">
+      <UniqueIdentifier>{b8853ff1-1b46-42f6-a2bf-a8f5816b6d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.View\1.FormView\0.Dialog\1.ParticleDig">
+      <UniqueIdentifier>{16a95c1e-d8be-4f94-81a6-7ef70205e6dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -336,6 +345,12 @@
     <ClInclude Include="TestDeferredMesh.h">
       <Filter>Framework\01.DXObject\-9.Mesh\PostMesh</Filter>
     </ClInclude>
+    <ClInclude Include="EffectDig.h">
+      <Filter>01.View\1.FormView\0.Dialog\0.EffectDig</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDig.h">
+      <Filter>01.View\1.FormView\0.Dialog\1.ParticleDig</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -472,6 +487,12 @@
     </ClCompile>
     <ClCompile Include="TestDeferredMesh.cpp">
       <Filter>Framework\01.DXObject\-9.Mesh\PostMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectDig.cpp">
+      <Filter>01.View\1.FormView\0.Dialog\0.EffectDig</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDig.cpp">
+      <Filter>01.View\1.FormView\0.Dialog\1.ParticleDig</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
